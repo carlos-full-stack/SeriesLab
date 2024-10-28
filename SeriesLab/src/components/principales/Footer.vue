@@ -1,12 +1,12 @@
 <script >
-//Aquí importamos el componente Title
 
 
 export default {
 
   //Aquí llamamos a todos los componentes
     components:{
-   
+    
+    },
     data(){
         return{
             
@@ -16,7 +16,9 @@ export default {
 </script>
 
 <template>
-  <div >Esto es un Footer</div>
-    
+  <div class="  ">
+   Esto es un Footer
+     
 
+  </div>
 </template>
