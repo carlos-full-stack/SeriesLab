@@ -1,4 +1,5 @@
 <script >
+import Logo from './widgets/LogoSeriesLab.vue'
 
 
 export default {
@@ -6,6 +7,7 @@ export default {
   //Aquí llamamos a todos los componentes
     components:{
     
+        Logo,
     },
     data(){
         return{
@@ -16,8 +18,8 @@ export default {
 </script>
 
 <template>
-  <div class="  ">
-   Esto es un Footer
+  <div class=" bg-secondaryBackground h-52 flex justify-center items-center ">
+   <Logo/>
      
 
   </div>
