@@ -20,7 +20,7 @@ export default {
 </script>
 <template>
     
-    <div class="bg-red-300 w-1/3 h-full">
+    <div class=" bg-secondaryBackground h-full">
         SIDEBAR
     </div>
   

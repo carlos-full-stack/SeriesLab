@@ -25,23 +25,19 @@ export default {
 </script>
 
 <template>
-  <div class=" font-poppinsLight min-h-screen text-white bg-mainBackground grid grid-cols-2 ">
+  <div class=" font-poppinsLight min-h-screen text-white bg-mainBackground flex flex-row ">
     
-    <div>
+    <div class="w-3/4">
      
     <BannerSerie/>
     <Main/>
-    <Footer/>
+    <!-- <Footer/> -->
     </div>
-    <div>
+    <div class="w-1/4">
       <SideBarRight/>
     </div>
     
 
-    
-    <!-- Ejemplo de componente que le pasamos un prop (componente) -->
-    <!-- <Title titleText='TITULO'/> -->
-     
 
   </div>
 </template>

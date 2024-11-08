@@ -19,7 +19,7 @@ export default {
 </script>
 <template>
     
-   <div class="px-20 h-56 bg-secondaryBackground py-3 flex flex-col">
+   <div class="px-20 h-56 bg-green-200 py-3 flex flex-col">
     <LogoSeriesLab/>
     <div class="py-5">Este es el banner</div>
     </div>
