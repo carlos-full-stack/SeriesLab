@@ -51,7 +51,7 @@ export default {
 </script>
 
 <template>
-  <div class=" font-poppinsLight h-72 bg-secondaryBackground text-white flex flex-col">
+  <div class=" font-poppinsLight h-72 text-white flex flex-col">
    
      <h2>Top Rated series</h2>
      <div class="flex flex-row gap-4 w-full h-auto">
