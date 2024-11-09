@@ -24,7 +24,7 @@ export default {
 </script>
 <template>
     
-    <div class="px-20 min-h-[calc(100vh-14rem)] flex flex-col gap-2 justify-center align-middle w-full">
+    <div class="px-20 min-h-[calc(100vh-14rem)] flex flex-col gap-14 justify-center align-middle w-full">
         <!-- Xavi -->
         <TopReviewsSeries/>
 

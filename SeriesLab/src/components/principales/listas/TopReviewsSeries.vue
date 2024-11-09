@@ -19,24 +19,20 @@ export default {
             },
             {
               idReview:2,
-              imageSerie: 'https://i.pinimg.com/236x/e4/0d/03/e40d03dd49aacd361bd69f030b915749.jpg',
+              imageSerie: 'https://postercinema.eu/cdn/shop/files/better-call-saul_eigg6itp.jpg?v=1706690442',
         
             },
             {
               idReview:3,
-              imageSerie: 'https://es.web.img3.acsta.net/c_310_420/pictures/20/03/09/16/09/0521918.jpg',
+              imageSerie: 'https://image.tmdb.org/t/p/original/hpB5jvpDo2imeF5BFfdmEmXdu7I.jpg',
         
             },
             {
               idReview:4,
-              imageSerie: 'https://www.ecartelera.com/carteles-series/700/788/003_p.jpg',
+              imageSerie: 'https://www.tallengestore.com/cdn/shop/products/HouseOfTheDragon_GoT_-TVShowPoster2_54b826ad-541c-41f3-91d3-8bae735750a3.jpg?v=1664546356',
         
             },
-            {
-              idReview:4,
-              imageSerie: 'https://www.tuposter.com/pub/media/catalog/product/cache/71d04d62b2100522587d43c930e8a36b/b/r/breaking_bad_walter_white_poster_1.png',
-        
-            },
+           
           ]
             
         }
@@ -46,15 +42,14 @@ export default {
 </script>
 
 <template>
-  <div class=" font-poppinsLight h-72 bg-secondaryBackground text-white flex flex-col">
+  <div class=" font-poppinsLight h-72  text-white flex flex-col">
    
-     <h2>Top Reviews series</h2>
-     <div>Aquí va la lista v-for</div>
-     <RouterView >
-      
-     </RouterView>
-     <RouterLink to="/movies">MOVIES</RouterLink>
-     
+     <h2>Top Reviews </h2>
+     <div class="flex flex-row gap-4 w-full h-auto justify-between ">
+        <a v-for="image in topReviews" :key="image.idReview" class=" mt-4 h-auto overflow-hidden ">
+        <img :src="image.imageSerie" alt="Portada de la serie" class=" w-48 h-full object-cover rounded-xl">
+        </a>
+     </div>
 
   </div>
 </template>
