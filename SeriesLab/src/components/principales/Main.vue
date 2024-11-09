@@ -1,6 +1,6 @@
 <script >
 import MainTopRated from './listas/MainTopRated.vue'
-import MainTopReviews from './listas/MainTopReviews.vue'
+import TopRatedSeries from './listas/TopRatedSeries.vue';
 
 export default {
     //Estos son los parámetros que se le pasan al componente
@@ -15,7 +15,7 @@ export default {
     //Aquí van los componentes importados
     components:{
         MainTopRated,
-        MainTopReviews,
+        TopRatedSeries,
 
     }
 }
@@ -24,7 +24,7 @@ export default {
     
     <div class="px-20 min-h-[calc(100vh-14rem)]">
         <MainTopRated/>
-        <MainTopReviews/>
+        <TopRatedSeries/>
     </div>
   
 </template>
