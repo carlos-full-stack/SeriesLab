@@ -34,7 +34,7 @@ export default {
             },
             {
               idSerie:5,
-              imageSerie: 'https://www.tuposter.com/pub/media/catalog/product/cache/71d04d62b2100522587d43c930e8a36b/b/r/breaking_bad_walter_white_poster_1.png',
+              imageSerie: 'https://es.web.img3.acsta.net/pictures/15/12/17/16/57/343857.jpg',
         
             },
             {
@@ -53,7 +53,7 @@ export default {
 <template>
   <div class=" font-poppinsLight h-72 text-white flex flex-col">
    
-     <h2>Top Rated series</h2>
+     <h2 class=" text-xl">Top Rated series</h2>
      <div class="flex flex-row gap-4 w-full h-auto">
         <a v-for="image in topRatedSeries" :key="idSerie" class=" mt-4 w-full h-auto overflow-hidden">
         <img :src="image.imageSerie" alt="Portada de la serie" class="w-full h-full object-cover rounded-xl">
