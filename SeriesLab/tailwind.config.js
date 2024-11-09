@@ -11,6 +11,7 @@ export default {
         primaryHover: '#519189',
         secondary: '#4D8E89',
         secondaryHover: '',
+        backgroundColor:'#1D1C2A',
       },
       backgroundColor: {
         mainBackground: '#1D1C2A',
