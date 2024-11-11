@@ -24,6 +24,10 @@ export default {
             type: Number,
             required:true,
         },
+        srcImg:{
+            type: String,
+            required: true
+        }
     },
     data(){
         return{
@@ -85,12 +89,21 @@ export default {
 
     <div v-if= "modificar == false">
     
-        <div class="bg-secondaryBackground rounded-xl py-5 px-5 mt-5">
+        <div class="bg-secondaryBackground rounded-xl  pr-5 mt-5 flex flex-row h-44 w-[900px]">
+            <div class="overflow-hidden rounded-xl w-36 h-44 pr-4 flex-shrink-0">
+                <img :src=srcImg alt="" class="object-cover rounded-xl w-full h-full  "  >
+            </div>
+            <div class="py-2 flex flex-col justify-between">
+                <div class="flex flex-row justify-between mb-2">
 
-            <div class="datos">Serie: {{ nombreSerie }}</div>
-            <div class="datos">Usuario: {{ usuario }}</div>
-            <div class="datos">Comentario: {{ comentario }}</div>
-            <div class="datos">Rating: {{ rating }}</div>
+                    <div class="text-sm">{{ nombreSerie }}</div>
+                    <div class="text-gray-300 text-sm">{{ usuario }}</div>
+                </div>
+                <div class=" font-poppinsThin text-sm">{{ comentario }}</div>
+                <div class="text-sm mt-2">Nota: {{ rating }}</div>
+            </div>
+
+            
             <div class="botones-update">
     
                 <!-- <button 

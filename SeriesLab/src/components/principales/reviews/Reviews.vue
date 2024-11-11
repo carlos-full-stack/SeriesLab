@@ -44,13 +44,16 @@ export default {
 
     },
     created() {
-      getTodos().then(todosData => {
-        this.allReviews = todosData;
+        setTimeout(()=>{
 
-        //Comprobando el array de objetos que son todas las reviews:
-        console.log(this.allReviews);
-        
-      });
+            getTodos().then(todosData => {
+              this.allReviews = todosData;
+      
+              //Comprobando el array de objetos que son todas las reviews:
+              console.log(this.allReviews);
+              
+            });
+        },1000)
     },
     methods:{
        //Escribir datos en Firestore (en este casola colección usuario)
@@ -81,7 +84,7 @@ export default {
 <template>
 
     
-    <div class="  lg:px-20">
+    <div :class="allReviews.length > 0 ? 'lg:px-5' : 'lg:px-0'  ">
     
     <div v-if="allReviews.length > 0">
 
@@ -90,10 +93,12 @@ export default {
         :nombreSerie=item.serieName
         :comentario=item.comment
         :rating=item.rating
-        
+        :srcImg=item.srcImage
         />
     </div>
-    <div v-else class="bg-red-600 rounded-xl px-5 py-5 mt-5">No information to display (YET)</div>
+    <div v-else class="bg-primaryBackground h-screen flex justify-center items-center ">
+        <img src="../../../assets/gifs/loading2.gif" width="30"  alt="">
+    </div>
     </div>
   
 </template>
