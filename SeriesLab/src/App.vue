@@ -39,7 +39,7 @@ export default {
     <!-- <Footer/> -->
     </div>
 
-    <div class="w-1/4">
+    <div class="w-1/4 fixed top-0 right-0 h-full">
       <SideBarRight/>
     </div>
     
