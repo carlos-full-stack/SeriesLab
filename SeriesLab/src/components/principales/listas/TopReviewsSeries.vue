@@ -45,11 +45,15 @@ export default {
   <div class=" font-poppinsLight h-72  text-white flex flex-col mt-4">
    
      <h2 class="text-xl">Top Reviews </h2>
+     
      <div class="flex flex-row gap-4 w-full h-auto justify-between ">
-        <a v-for="image in topReviews" :key="image.idReview" class=" mt-4 h-auto overflow-hidden ">
+      
+
+        <RouterLink to="/reviews" v-for="image in topReviews" :key="image.idReview" class=" mt-4 h-auto overflow-hidden shadow-lg shadow-black rounded-xl">
         <img :src="image.imageSerie" alt="Portada de la serie" class=" w-48 h-full object-cover rounded-xl">
-        </a>
-     </div>
+        </RouterLink>
+      </div>
+    
 
   </div>
 </template>
