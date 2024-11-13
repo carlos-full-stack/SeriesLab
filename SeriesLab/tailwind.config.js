@@ -16,6 +16,7 @@ export default {
       backgroundColor: {
         mainBackground: '#1D1C2A',
         secondaryBackground: '#2B2C3E',
+        sideBarBg:'222433'
       },
       fontFamily: {
         poppinsBlack: 'poppins-black',
