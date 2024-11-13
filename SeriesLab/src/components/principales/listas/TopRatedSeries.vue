@@ -1,6 +1,7 @@
 <script >
 //Aquí importamos el componente Title
 
+import { RouterLink } from 'vue-router';
 
 export default {
 
@@ -55,9 +56,9 @@ export default {
    
      <h2 class=" text-xl">Top Rated series</h2>
      <div class="flex flex-row gap-4 w-full h-auto">
-        <a v-for="image in topRatedSeries" :key="idSerie" class=" mt-4 w-full h-auto overflow-hidden">
+        <RouterLink to="/review-serie" v-for="image in topRatedSeries" :key="idSerie" class=" mt-4 w-full h-auto overflow-hidden">
         <img :src="image.imageSerie" alt="Portada de la serie" class="w-full h-full object-cover rounded-xl">
-        </a>
+        </RouterLink>
      </div>
 
   </div>

@@ -1,6 +1,9 @@
 <script >
-import BannerSerie from './banners/BannerSerie.vue';
-import Main from './Main.vue';
+
+import AllReviews from '../principales/reviews/AllReviews.vue';
+import FormReviews from '../principales/reviews/FormReviews.vue';
+import TopReview from '../principales/reviews/TopReview.vue';
+
 
 export default {
     //Estos son los parámetros que se le pasan al componente
@@ -14,8 +17,10 @@ export default {
     },
     //Aquí van los componentes importados
     components:{
-      Main,
-      BannerSerie,
+
+        AllReviews,
+        TopReview,
+        FormReviews
       
     //   Footer,
     }
@@ -24,8 +29,11 @@ export default {
 <template>
     
     <div class=" min-h-[calc(100vh-14rem)] flex flex-col gap-4 justify-center align-middle w-full">
-        <BannerSerie/>
-        <Main/>
+<div class="flex flex-col">
+    <TopReview />
+    <FormReviews />
+    <AllReviews />
+</div>
     </div>
   
 </template>
