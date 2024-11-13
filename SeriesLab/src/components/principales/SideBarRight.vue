@@ -1,5 +1,10 @@
 <script >
 
+import LastReviewsContainer from './listas/LastReviewsContainer.vue';
+import UserLastReviewsContainer from './listas/UserLastReviewsContainer.vue';
+import Login from './widgets/Login.vue';
+import SearchBar from './widgets/SearchBar.vue';
+
 export default {
     //Estos son los parámetros que se le pasan al componente
     props:{
@@ -13,14 +18,21 @@ export default {
     //Aquí van los componentes importados
     components:{
     
+        LastReviewsContainer,
+        UserLastReviewsContainer,
+        SearchBar,
+        Login
 
     }
 }
 </script>
 <template>
     
-    <div class=" bg-secondaryBackground h-full">
-        SIDEBAR
+    <div class=" bg-secondaryBackground h-full flex flex-col gap-y-10 items-center justify-center">
+        <SearchBar />
+        <Login />
+        <UserLastReviewsContainer />
+        <LastReviewsContainer />
     </div>
   
 </template>
