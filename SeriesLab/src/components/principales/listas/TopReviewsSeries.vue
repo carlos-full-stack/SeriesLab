@@ -42,7 +42,7 @@ export default {
 </script>
 
 <template>
-  <div class=" font-poppinsLight h-72  text-white flex flex-col mt-4">
+  <div class=" font-poppinsLight h-72  text-white flex flex-col ">
    
      <h2 class="text-xl">Top Reviews </h2>
      

@@ -29,14 +29,9 @@ export default {
 <template>
   <div class=" font-poppinsLight min-h-screen text-white bg-mainBackground flex flex-row ">
     
-    <div id='lef-side'class="w-3/4">
+    <div id='lef-side'class="w-3/4 ">
       
       <RouterView/>
-  
-   
-    
-      
-    <!-- <Footer/> -->
     </div>
 
     <div class="w-1/4 fixed top-0 right-0 h-full">

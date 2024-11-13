@@ -23,7 +23,7 @@ export default {
 </script>
 <template>
     
-    <div class="px-20 min-h-[calc(100vh-14rem)] flex flex-col gap-14 justify-center align-middle w-full">
+    <div class=" min-h-[calc(100vh-14rem)] flex flex-col gap-4 justify-center align-middle w-full">
         <BannerSerie/>
         <Main/>
     </div>

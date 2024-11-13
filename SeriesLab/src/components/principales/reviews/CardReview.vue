@@ -38,11 +38,14 @@ export default {
         };
     },
     methods:{
+
+        //Para mostrar la opción de Guardar o eliminar
         modificarDatos(){
             console.log('Modificando datos');
             this.modificar = true
             console.log(this.modificar);
         },
+
         async guardarDatos(){
             //Conexión con la app de Firestore que se encuentra en el firebase.js
             const db = getFirestore(app);
@@ -66,6 +69,7 @@ export default {
                 
             }
         },
+
         async eliminarDatos(){
              //Conexión con la app de Firestore que se encuentra en el firebase.js
             const db = getFirestore(app);
