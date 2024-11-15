@@ -61,7 +61,6 @@ export default {
             fetch(DB_TOP_RATED)
             .then(res=>res.json())
             .then(data=>{
-                console.log(data);
                 this.arrayTopRated = data.results.slice(0,6)
                 
             })
@@ -73,7 +72,6 @@ export default {
                 this.allReviewsFirestore = todosData.slice(0,4)
 
                 //Comprobando el array de objetos que son todas las reviews:
-                console.log(this.allReviewsFirestore);
                 
                 });
                 },1000)

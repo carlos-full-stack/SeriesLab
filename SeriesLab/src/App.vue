@@ -29,12 +29,12 @@ export default {
 <template>
   <div class=" font-poppinsLight min-h-screen text-white bg-mainBackground flex flex-row ">
     
-    <div id='lef-side'class="w-3/4 ">
+    <div id='lef-side'class="lg:w-3/4 ">
       
       <RouterView/> 
     </div>
 
-    <div class="w-1/4 fixed top-0 right-0 h-full">
+    <div class="lg:w-1/4 lg:fixed lg:top-0 lg:right-0 h-full ">
       <SideBarRight/>
     </div>
     
