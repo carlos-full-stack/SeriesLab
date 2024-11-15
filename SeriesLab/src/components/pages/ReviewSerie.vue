@@ -89,8 +89,11 @@ export default {
         />
     </div>
     <!-- Contenedor LOADING -->
-    <div v-else class="flex flex-row justify-center">
-        <img src="../../assets/gifs/loading2.gif" width="30"  alt="">
+    <div v-else class="flex flex-row justify-center h-96 items-center ">
+        <div class="flex flex-col justify-center  h-32 ">
+            <img src="../../assets/gifs/loading2.gif" width="30"  alt="">
+        </div>
+        
     </div>
     
     <FormReviews />
