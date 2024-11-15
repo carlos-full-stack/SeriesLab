@@ -49,8 +49,8 @@ export default {
      <div class="flex flex-row gap-4 w-full h-auto justify-between ">
       
 
-        <RouterLink to="/reviews" v-for="image in topReviews" :key="image.idReview" class=" mt-4 h-auto overflow-hidden shadow-lg shadow-black rounded-xl">
-        <img :src="image.imageSerie" alt="Portada de la serie" class=" w-48 h-full object-cover rounded-xl">
+        <RouterLink to="/reviews" v-for="image in topReviews" :key="image.idReview" class=" mt-4 h-auto overflow-hidden shadow-lg shadow-black rounded-2xl">
+        <img :src="image.imageSerie" alt="Portada de la serie" class=" w-48 h-full object-cover rounded-2xl">
         </RouterLink>
       </div>
     

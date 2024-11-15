@@ -4,6 +4,13 @@
 import { RouterLink } from 'vue-router';
 
 export default {
+    props:{
+      arrayFromData:{
+        type: Array
+      }
+
+
+    },
 
   //Aquí llamamos a todos los componentes
     components:{
@@ -11,39 +18,10 @@ export default {
     },
     data(){
         return{
-          topRatedSeries:
-          [
-            {
-              idSerie:1,
-              imageSerie: 'https://es.web.img3.acsta.net/c_310_420/pictures/18/04/04/22/52/3191575.jpg',
+          pathBaseSrcImg:'https://image.tmdb.org/t/p/w200/',
+          pathUrl: '/review-serie/',
+          
         
-            },
-            {
-              idSerie:2,
-              imageSerie: 'https://i.pinimg.com/236x/e4/0d/03/e40d03dd49aacd361bd69f030b915749.jpg',
-        
-            },
-            {
-              idSerie:3,
-              imageSerie: 'https://es.web.img3.acsta.net/c_310_420/pictures/20/03/09/16/09/0521918.jpg',
-        
-            },
-            {
-              idSerie:4,
-              imageSerie: 'https://www.ecartelera.com/carteles-series/700/788/003_p.jpg',
-        
-            },
-            {
-              idSerie:5,
-              imageSerie: 'https://es.web.img3.acsta.net/pictures/15/12/17/16/57/343857.jpg',
-        
-            },
-            {
-              idSerie:6,
-              imageSerie: 'https://m.media-amazon.com/images/M/MV5BM2ZiNThlNzItNmY3Ny00NjA2LWJlMjItNTk1NDI3MDMyMTk4XkEyXkFqcGc@._V1_.jpg',
-        
-            },
-          ]
             
         }
         
@@ -52,13 +30,20 @@ export default {
 </script>
 
 <template>
-  <div class=" font-poppinsLight h-72 text-white flex flex-col">
+  
+  <div class=" font-poppinsLight  text-white flex flex-col">
+   
    
      <h2 class=" text-xl">Top Rated series</h2>
-     <div class="flex flex-row gap-4 w-full h-auto">
-        <RouterLink to="/review-serie" v-for="image in topRatedSeries" :key="idSerie" class=" mt-4 w-full h-auto overflow-hidden">
-        <img :src="image.imageSerie" alt="Portada de la serie" class="w-full h-full object-cover rounded-xl">
+     <div class="flex flex-row gap-4 w-full h-auto justify-between">
+    
+        <RouterLink v-if="arrayFromData.length > 0"  v-for="serie in arrayFromData" :to="pathUrl+serie.id" :key="serie.id" class=" mt-4 h-36 w-28 overflow-hidden shadow-lg shadow-black rounded-2xl">
+        <img :src="pathBaseSrcImg+serie.poster_path" :alt="serie.name" class="w-full h-full object-cover rounded-2xl">
         </RouterLink>
+
+        <div v-else>
+          <div class="bg-red-400">NO DATA</div>
+        </div>
      </div>
 
   </div>
