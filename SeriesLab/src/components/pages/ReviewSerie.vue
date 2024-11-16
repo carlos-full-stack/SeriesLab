@@ -96,7 +96,9 @@ export default {
     </div>
     
     <FormReviews />
-    <AllReviews />
+    <AllReviews 
+   :serieId="String(reviewId)"
+    />
 </div>
     </div>
   
