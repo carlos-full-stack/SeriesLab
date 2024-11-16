@@ -28,7 +28,7 @@ export default {
 </script>
 <template>
     
-    <div class=" bg-secondaryBackground h-full flex flex-col gap-y-10 items-center justify-center px-8">
+    <div class=" bg-secondaryBackground h-full flex flex-col gap-y-10 items-center justify-start px-8">
         <SearchBar />
         <Login />
         <UserLastReviewsContainer />

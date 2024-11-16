@@ -16,13 +16,13 @@ export default {
 
           {
               titulo: "BoJack Horseman 2",
-              parrafo: "Conoce al caballo mas querido de los 90's... veinte años después. ",
+              parrafo: "Conoce al caballo mas querido de los 90's",
               imgUrl: "https://f4.bcbits.com/img/a2983687285_10.jpg"
           },
 
           {
               titulo: "Fargo 2",
-              parrafo: "Serie de televisión antológica estadounidense de género policíaco.",
+              parrafo: "Serie de televisión antológica estadounidense",
               imgUrl: "https://www.lanacion.com.ar/resizer/v2/jon-hamm-como-el-malevolo-roy-tillman-en-la-7HN26MYSSVGYNETPK35466BZD4.JPG?auth=2b6473fefb00b2a38f746a4f7f7b992456a263440cb807a6b140a45704af24e6&width=880&height=586&quality=70&smart=false&focal=916,406"
           },
 ]            
