@@ -11,12 +11,13 @@ export default {
         primaryHover: '#519189',
         secondary: '#4D8E89',
         secondaryHover: '',
-        backgroundColor:'#1D1C2A',
+        backgroundColor: '#1D1C2A',
+        buttonColor: '#7849b4',
       },
       backgroundColor: {
         mainBackground: '#1D1C2A',
         secondaryBackground: '#2B2C3E',
-        sideBarBg:'#222433'
+        sideBarBg: '#222433'
       },
       fontFamily: {
         poppinsBlack: 'poppins-black',
