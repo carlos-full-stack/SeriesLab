@@ -6,9 +6,6 @@ import FormReviews from '../principales/reviews/FormReviews.vue';
 import TopReview from '../principales/reviews/TopReview.vue';
 
 
-
-
-
 export default {
 
  data(){
@@ -18,7 +15,7 @@ export default {
         loading: true, // Estado de carga
         error: null,
         pathBaseSrcImg:'https://image.tmdb.org/t/p/w200/',
-         // Manejo de errores
+        
     }
 
 },
