@@ -6,8 +6,17 @@ import SideBarRight from './components/principales/SideBarRight.vue'
 import BannerSerie from './components/principales/banners/BannerSerie.vue'
 import Footer from './components/principales/Footer.vue'
 import { RouterLink,RouterView } from 'vue-router'
+import { useReviewsFirestore } from '../stores/reviewsFirestore.js'
+
 
 export default {
+
+    setup(){
+      const reviewsStore = useReviewsFirestore()
+      return {
+        reviewsStore
+      }
+    },
 
   //Aquí llamamos a todos los componentes
     components:{
@@ -23,6 +32,9 @@ export default {
             
         }
     },
+    created(){
+      this.reviewsStore.readReviews()
+    }
 }
 </script>
 

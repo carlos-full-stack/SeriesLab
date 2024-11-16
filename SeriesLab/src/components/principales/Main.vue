@@ -70,7 +70,6 @@ export default {
 
                 getTodos().then(todosData => {
                 this.allReviewsFirestore = todosData.slice(0,4)
-
                 //Comprobando el array de objetos que son todas las reviews:
                 
                 });
