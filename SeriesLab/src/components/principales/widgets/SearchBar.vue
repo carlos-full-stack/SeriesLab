@@ -24,7 +24,7 @@ export default {
 
   </div> -->
 
-  <form action="" class="w-[410px]">
+  <form action="" class="w-full">
     <input class="w-full h-14 rounded-2xl bg-white bg-opacity-5 pl-4" placeholder="Search" type="text" name="" id="">
   </form>
 </template>

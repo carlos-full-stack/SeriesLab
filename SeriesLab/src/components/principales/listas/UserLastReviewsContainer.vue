@@ -32,7 +32,7 @@ export default {
 </script>
 
 <template>
-  <div class="last-reviews-container flex flex-col max-w-[410px]">
+  <div class="last-reviews-container flex flex-col w-full">
     <h3 class="pb-2">User last reviews</h3>
     <div class="flex flex-col gap-y-5 rounded-2xl">
       <CardUserLastReviews v-for="r in dummyReviews" :key="r.idReview" :review = r />
