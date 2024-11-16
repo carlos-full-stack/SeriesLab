@@ -31,11 +31,11 @@ export default {
 
 <template>
   
-  <div class=" font-poppinsLight  text-white flex flex-col">
+  <div class=" font-poppinsLight  text-white flex flex-col pb-8">
    
    
-     <h2 class=" text-xl">Top Rated series</h2>
-     <div class="flex flex-row gap-4 w-full h-auto justify-between">
+     <h2 class=" text-xl ">Top Rated series</h2>
+     <div class="flex flex-row w-full h-auto justify-between">
     
         <RouterLink v-if="arrayFromData.length > 0"  v-for="serie in arrayFromData" :to="pathUrl+serie.id" :key="serie.id" class=" mt-4 h-36 w-28 overflow-hidden shadow-lg shadow-black rounded-2xl">
         <img :src="pathBaseSrcImg+serie.poster_path" :alt="serie.name" class="w-full h-full object-cover rounded-2xl">

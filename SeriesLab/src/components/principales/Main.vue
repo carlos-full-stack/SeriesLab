@@ -81,7 +81,7 @@ export default {
 </script>
 <template>
     
-    <div class="px-20 min-h-[calc(100vh-14rem)] flex flex-col gap-20 justify-center pb-16 align-middle w-full ">
+    <div class="px-20 min-h-[calc(100vh-14rem)] flex flex-col gap-20 justify-between  align-middle w-full ">
         <!-- Xavi -->
         <TopReviewsSeries
         :arrayFromFirestore="allReviewsFirestore"

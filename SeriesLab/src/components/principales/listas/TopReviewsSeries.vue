@@ -1,5 +1,6 @@
 <script >
 import { RouterLink,RouterView } from 'vue-router';
+import LoadingSpinner from '../widgets/LoadingSpinner.vue';
 
 
 export default {
@@ -10,7 +11,7 @@ export default {
 
   //Aquí llamamos a todos los componentes
     components:{
-     
+     LoadingSpinner,
     },
     data(){
         return{
@@ -27,20 +28,19 @@ export default {
 <template>
   <div class=" font-poppinsLight  text-white flex flex-col ">
    
-     <h2 class="text-xl">Top Reviews </h2>
+     <h2 v-if="arrayFromFirestore.length > 0" class="text-xl">Top Reviews </h2>
      
      <div class="flex flex-row gap-4 w-full h-auto justify-between ">
       
 
         <RouterLink v-if="arrayFromFirestore.length > 0"  v-for="serie in arrayFromFirestore" :to="pathUrl+serie.serieId" :key="serie.serieId" class=" mt-4 h-auto overflow-hidden shadow-lg shadow-black rounded-2xl">
         <img :src="serie.srcImage" :alt="serie.serieName" class=" w-48 h-full object-cover rounded-2xl">
-      <!-- {{ console.log(serie.serieId)
-       }} -->
+      
       </RouterLink>
+          <div v-else  class="flex h-80 flex-col justify-center items-center w-full">
+            <LoadingSpinner/>
+          </div>
 
-        <div v-else>
-          <div class="bg-red-400">NO DATA</div>
-        </div>
       </div>
     
 

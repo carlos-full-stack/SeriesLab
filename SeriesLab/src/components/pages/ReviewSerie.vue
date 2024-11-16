@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router';
 import AllReviews from '../principales/reviews/AllReviews.vue';
 import FormReviews from '../principales/reviews/FormReviews.vue';
 import TopReview from '../principales/reviews/TopReview.vue';
+import LoadingSpinner from '../principales/widgets/LoadingSpinner.vue'
 
 
 export default {
@@ -28,7 +29,8 @@ export default {
 
         AllReviews,
         TopReview,
-        FormReviews
+        FormReviews,
+        LoadingSpinner,
       
     //   Footer,
     },
@@ -88,7 +90,7 @@ export default {
     <!-- Contenedor LOADING -->
     <div v-else class="flex flex-row justify-center h-96 items-center ">
         <div class="flex flex-col justify-center  h-32 ">
-            <img src="../../assets/gifs/loading2.gif" width="30"  alt="">
+            <LoadingSpinner/>
         </div>
         
     </div>
