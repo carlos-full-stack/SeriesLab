@@ -31,7 +31,7 @@ export default {
 
 <template>
   
-  <div class=" font-poppinsLight  text-white flex flex-col pb-8 ">
+  <div class="pl-20 font-poppinsLight  text-white flex flex-col pb-8 ">
    
    
      <h2 class=" text-xl ">Top Rated series</h2>
