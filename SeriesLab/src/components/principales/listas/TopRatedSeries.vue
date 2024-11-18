@@ -37,8 +37,8 @@ export default {
      <h2 class=" text-xl ">Top Rated series</h2>
      <div class="flex flex-row w-full h-auto justify-between pr-5">
     
-        <RouterLink v-if="arrayFromData.length > 0"  v-for="serie in arrayFromData" :to="pathUrl+serie.id" :key="serie.id" class=" mt-4 h-36 w-28 overflow-hidden shadow-lg shadow-black rounded-2xl">
-        <img :src="pathBaseSrcImg+serie.poster_path" :alt="serie.name" class="w-full h-full object-cover rounded-2xl">
+        <RouterLink v-if="arrayFromData.length > 0"  v-for="serie in arrayFromData" :to="pathUrl+serie.id" :key="serie.id" class=" mt-4 h-36 w-28 overflow-hidden shadow-lg shadow-black rounded-2xl hover:scale-105 transition-all ease-in-out duration-100">
+        <img :src="pathBaseSrcImg+serie.poster_path" :alt="serie.name" class="w-full h-full object-cover rounded-2xl ">
         </RouterLink>
 
         <div v-else>
