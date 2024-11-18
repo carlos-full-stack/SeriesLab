@@ -8,6 +8,7 @@ import Footer from './components/principales/Footer.vue'
 import { RouterLink,RouterView } from 'vue-router'
 import { useReviewsFirestore } from '../stores/reviewsFirestore.js'
 import SearchBar from './components/principales/widgets/SearchBar.vue'
+import LogInAuth from './components/principales/auth/LogInAuth.vue'
 
 
 export default {
@@ -27,11 +28,14 @@ export default {
       BannerSerie,
       Footer,
       SearchBar,
+      LogInAuth,
+      
      
     },
     data(){
         return{
-            
+            showLogIn : true,
+            showSignup: false,
         }
     },
     created(){
@@ -43,7 +47,10 @@ export default {
 <template>
   <div class=" font-poppinsLight min-h-screen text-white bg-mainBackground flex lg:flex-row ">
 
-
+    <div class="fixed z-30 h-screen bg-backgroundColor bg-opacity-90 w-full hidden">
+      
+      <LogInAuth/>
+    </div>
     <div class="fixed  left-1/3 right-5 lg:hidden">
       <SearchBar/>
     </div>
