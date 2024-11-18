@@ -87,7 +87,7 @@ export default {
                     }
                 }
                 
-                //DEjando solamente las 10 con más reviews:
+                //Dejando solamente las 10 con más reviews:
                 this.top10filteredReviews = this.filteredReviewsFirestore.slice(0,10)
                 console.log(this.top10filteredReviews);
                 

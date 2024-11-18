@@ -20,9 +20,7 @@ export default {
         return{
           pathBaseSrcImg:'https://image.tmdb.org/t/p/w200/',
           pathUrl: '/review-serie/',
-          
-        
-            
+
         }
         
     },
