@@ -44,7 +44,7 @@ export default {
   <div class=" font-poppinsLight min-h-screen text-white bg-mainBackground flex lg:flex-row ">
 
 
-    <div class="fixed  left-1/2 right-5 lg:hidden">
+    <div class="fixed  left-1/3 right-5 lg:hidden">
       <SearchBar/>
     </div>
 
@@ -53,7 +53,7 @@ export default {
       <RouterView/> 
     </div>
 
-    <div class="lg:w-1/4 lg:fixed  lg:top-0 lg:right-0 h-full w-0  ">
+    <div class="lg:w-1/4 lg:fixed  lg:top-0 lg:right-0 h-full w-0 ">
       <SideBarRight/>
     </div>
     

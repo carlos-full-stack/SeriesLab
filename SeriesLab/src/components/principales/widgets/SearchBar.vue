@@ -37,6 +37,6 @@ export default {
   </div> -->
 
   <form action="" class="w-full">
-    <input class="w-full h-10 rounded-2xl bg-white bg-opacity-5 pl-5 mt-8 search-icon" placeholder="Search" type="text" name="" id="" >
+    <input class="w-full h-10 rounded-2xl bg-white lg:bg-opacity-5 bg-opacity-20 pl-5 mt-8 search-icon" placeholder="Search" type="text" name="" id="" >
   </form>
 </template>
