@@ -9,14 +9,18 @@ import { RouterLink,RouterView } from 'vue-router'
 import { useReviewsFirestore } from '../stores/reviewsFirestore.js'
 import SearchBar from './components/principales/widgets/SearchBar.vue'
 import LogInAuth from './components/principales/auth/LogInAuth.vue'
+import {useLoginState} from '../stores/stateWidgetsStore.js'
+import {  House, UserRound } from 'lucide-vue-next'
 
 
 export default {
 
     setup(){
       const reviewsStore = useReviewsFirestore()
+      const showLogIn = useLoginState()
       return {
-        reviewsStore
+        reviewsStore,
+        showLogIn,
       }
     },
 
@@ -29,17 +33,22 @@ export default {
       Footer,
       SearchBar,
       LogInAuth,
+      UserRound,
+      House
       
      
     },
     data(){
         return{
-            showLogIn : true,
+            // showLogIn : true,
             showSignup: false,
         }
     },
     created(){
       this.reviewsStore.readReviews()
+      console.log(`STATE: ${this.showLogIn}`);
+      
+      
     }
 }
 </script>
@@ -47,10 +56,24 @@ export default {
 <template>
   <div class=" font-poppinsLight min-h-screen text-white bg-mainBackground flex lg:flex-row ">
 
-    <div class="fixed z-30 h-screen bg-backgroundColor bg-opacity-90 w-full hidden">
+    <div v-if="showLogIn.showLoginMenu" class="fixed z-30 h-screen bg-backgroundColor bg-opacity-90 w-full ">
       
       <LogInAuth/>
     </div>
+
+    <div class="fixed  z-20 flex flex-col  gap-3  py-5  ">
+
+      <div class="">
+        <button @click="showLogIn.toggleMenuLogin()" class=" px-5 hover:scale-110 transition-all duration-500 ease-in-out hover:text-primary">
+          <UserRound /></button>
+      </div>
+      <!-- <div class="">
+        <button @click="showLogIn.toggleMenuLogin()" class=" px-5 hover:scale-110 transition-all duration-500 ease-in-out hover:text-primary">
+          <House /> </button>
+      </div> -->
+      
+    </div>
+
     <div class="fixed  left-1/3 right-5 lg:hidden">
       <SearchBar/>
     </div>

@@ -1,9 +1,20 @@
 <script>
 
 import LogoSeriesLab from '../widgets/LogoSeriesLab.vue';
-// import LogoSeriesLab from '../widgets/LogoSeriesLab.vue'
+import { CircleX, Edit, Trash2 } from 'lucide-vue-next'
+import { useLoginState } from '../../../../stores/stateWidgetsStore';
 
 export default {
+
+    setup(){
+      
+      const showLogIn = useLoginState()
+      return {
+        
+        showLogIn,
+      }
+    },
+
     data() {
     return {
      
@@ -14,14 +25,21 @@ export default {
         // serie: Object,
     },
     components:{
-        LogoSeriesLab
+        LogoSeriesLab,
+        CircleX,
     },
 }
 </script>
 <template>
-    <div class="z-50 w-full flex flex-col justify-center px-5 md:px-40   gap-2 h-screen ">
+    <div class="z-50 w-full flex flex-col justify-center px-5 items-center  gap-2 h-screen ">
 
-        <div class="flex flex-col justify-center items-center lg:px-60 xl:px-[200px] gap-2  pb-5">
+        <div class="flex flex-col justify-center items-center md:max-w-96 w-full  gap-2  pb-5">
+            <div class=" w-full flex flex-row justify-end">
+                <button>
+                    <CircleX 
+                    @click="showLogIn.toggleMenuLogin()"
+                    class="hover:scale-110 transition-all duration-500 ease-in-out hover:text-primary" /></button>
+            </div>
             <div class="py-5">
 
                 <LogoSeriesLab/>
