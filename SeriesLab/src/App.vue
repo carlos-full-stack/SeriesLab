@@ -74,12 +74,12 @@ export default {
 <template>
   <div class=" font-poppinsLight min-h-screen text-white bg-mainBackground flex lg:flex-row ">
 
-    <!-- <div v-if="showLogIn.showLoginMenu" class="fixed z-30 h-screen bg-backgroundColor bg-opacity-90 w-full ">
+    <div v-if="showLogIn.showLoginMenu" class="fixed z-30 h-screen bg-backgroundColor bg-opacity-90 w-full ">
       
       <LogInAuth/>
     </div>
 
-    <div class="fixed  z-20 flex flex-col  gap-3  py-5  ">
+    <!-- <div class="fixed  z-20 flex flex-col  gap-3  py-5  ">
 
       <div class="">
         <button @click="showLogIn.toggleMenuLogin()" class=" px-5 hover:scale-110 transition-all duration-500 ease-in-out hover:text-primary">

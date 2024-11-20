@@ -49,10 +49,7 @@ export default {
 
 <template>
 <div class="grid grid-cols-2 gap-y-2 w-full text-sm">
-  <div v-if="showLogIn.showLoginMenu" class="fixed z-30 h-screen bg-backgroundColor bg-opacity-90 w-full ">
-      
-      <LogInAuth/>
-    </div>
+
 
   <div class="flex col-span-2 justify-between mb-2  text-sm">
     <div class="flex flex-row items-center justify-center gap-x-3 ">

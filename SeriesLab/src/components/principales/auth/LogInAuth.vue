@@ -82,8 +82,7 @@ export default {
             />
             <button 
                 @click="handleSubmit"
-                class="py-5 rounded-2xl  bg-purple-500 flex justify-center lg:w-96 xl:max-w-96 w-full transition-all duration-500 ease-in-out hover:bg-purple-700"
-            >
+                class='py-5 rounded-2xl  bg-purple-500 flex justify-center lg:w-96 xl:max-w-96 w-full transition-all duration-500 ease-in-out hover:bg-purple-700'            >
                 {{ isSignup ? 'Crear cuenta' : 'Iniciar Sesión' }}
             </button>
             <button 
