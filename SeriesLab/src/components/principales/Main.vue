@@ -33,7 +33,8 @@ export default {
 
             arrayTopRated: [],
             allReviewsFirestore: [],
-            
+            filteredReviewsFirestore:[],
+            top10filteredReviews:[]
 
         }
     },
@@ -69,10 +70,28 @@ export default {
             setTimeout(()=>{
 
                 getTodos().then(todosData => {
-                this.allReviewsFirestore = todosData.slice(0,4)
-
-                //Comprobando el array de objetos que son todas las reviews:
+                this.allReviewsFirestore = todosData.slice(0,30)
                 
+                const idCount = {};
+                this.allReviewsFirestore.forEach(review => {
+                    idCount[review.serieId] = (idCount[review.serieId] || 0) + 1;
+                 
+                });
+
+                const idsSinRepetir = new Set();
+
+                for(const r of this.allReviewsFirestore){
+                    if(!idsSinRepetir.has(r.serieId)){
+                        idsSinRepetir.add(r.serieId)
+                        this.filteredReviewsFirestore.push(r)
+                    }
+                }
+                
+                //Dejando solamente las 10 con más reviews:
+                this.top10filteredReviews = this.filteredReviewsFirestore.slice(0,10)
+                console.log(this.top10filteredReviews);
+                
+
                 });
                 },1000)
 
@@ -82,10 +101,10 @@ export default {
 </script>
 <template>
     
-    <div class="px-20 min-h-[calc(100vh-14rem)] flex flex-col gap-20 justify-center pb-16 align-middle w-full ">
+    <div class=" min-h-[calc(100vh-14rem)] flex flex-col justify-between  align-middle w-full ">
         <!-- Xavi -->
         <TopReviewsSeries
-        :arrayFromFirestore="allReviewsFirestore"
+        :arrayFromFirestore="top10filteredReviews"
         />
 
         <!-- Mary -->

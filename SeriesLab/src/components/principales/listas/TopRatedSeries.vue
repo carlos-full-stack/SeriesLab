@@ -20,9 +20,7 @@ export default {
         return{
           pathBaseSrcImg:'https://image.tmdb.org/t/p/w200/',
           pathUrl: '/review-serie/',
-          
-        
-            
+
         }
         
     },
@@ -31,14 +29,14 @@ export default {
 
 <template>
   
-  <div class=" font-poppinsLight  text-white flex flex-col">
+  <div class="lg:pl-20 pl-5 font-poppinsLight  text-white flex flex-col pb-8 ">
    
    
-     <h2 class=" text-xl">Top Rated series</h2>
-     <div class="flex flex-row gap-4 w-full h-auto justify-between">
+     <h2 class=" text-xl ">Top Rated series</h2>
+     <div class="flex lg:flex-row flex-shrink lg:w-full lg:h-auto lg:justify-between pr-5">
     
-        <RouterLink v-if="arrayFromData.length > 0"  v-for="serie in arrayFromData" :to="pathUrl+serie.id" :key="serie.id" class=" mt-4 h-36 w-28 overflow-hidden shadow-lg shadow-black rounded-2xl">
-        <img :src="pathBaseSrcImg+serie.poster_path" :alt="serie.name" class="w-full h-full object-cover rounded-2xl">
+        <RouterLink v-if="arrayFromData.length > 0"  v-for="serie in arrayFromData" :to="pathUrl+serie.id" :key="serie.id" class=" mt-4 h-36 w-28 overflow-hidden shadow-lg shadow-black rounded-2xl hover:scale-105 transition-all ease-in-out duration-100">
+        <img :src="pathBaseSrcImg+serie.poster_path" :alt="serie.name" class="w-full h-full object-cover rounded-2xl ">
         </RouterLink>
 
         <div v-else>

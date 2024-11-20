@@ -26,9 +26,9 @@ export default {
     <div 
     :style="{backgroundImage: `url(${serie.srcUrl})`}" 
     class="w-full  bg-cover bg-center bg-no-repeat mb-0 ">
-        <div class="px-20 h-52 bg-gradient-to-r from-backgroundColor to-transparent pt-6 flex flex-col w-2/3">
+        <div class="lg:px-20 px-5 lg:h-52 h-24 bg-gradient-to-r from-backgroundColor to-transparent pt-6 flex flex-col w-2/3">
          <LogoSeriesLab/>
-         <div class="py-5 flex flex-row justify-between  mt-5 ">
+         <div class="py-5 lg:flex flex-row justify-between  mt-5 hidden ">
              <h2 class=" flex align-middle text-3xl font-poppinsBold">{{ serie.name }}</h2>
              <div class="flex flex-row gap-2">
 
@@ -37,7 +37,7 @@ export default {
              </div>
              
          </div>
-         <p class="text-xs">{{ serie.desc }}</p>
+         <p class="lg:flex text-xs hidden">{{ serie.desc }}</p>
          </div>
     </div>
   
