@@ -1,6 +1,12 @@
 <script >
-//Aquí importamos el componente Title
 
+import { RouterLink } from 'vue-router';
+
+const API_KEY = ''
+const query = ''
+const DB_BASE = 'https://api.themoviedb.org/3/search/tv?api_key='
+const LANGUAGE = 'es-ES';
+const DB = `${DB_BASE}${API_KEY}&query=${query}&language=${LANGUAGE}`
 
 export default {
 
@@ -10,9 +16,24 @@ export default {
     },
     data(){
         return{
-            
+          searchQuery: '',
+          pathUrl: '/buscar-serie/'
         }
     },
+    methods:{
+
+      search() {
+      if (this.searchQuery.trim()) {
+        // Redirigimos a la ruta /buscar-serie con el término de búsqueda
+        this.$router.push({
+          name: 'buscarSerie',
+          params: { serie: this.searchQuery },
+        });
+      } else {
+        console.log('El campo de búsqueda está vacío');
+      }
+    },
+    }
 }
 </script>
 
@@ -29,14 +50,17 @@ export default {
 </style>
 
 <template>
-  <!-- <div class="my-5 font-poppinsLight h-96 text-white flex flex-col bg-secondaryBackground">
-   
-     <h2>Top rated series</h2>
-     <div>Aquí va la lista v-for</div>
 
-  </div> -->
+  <form @submit.prevent class="w-full">
+    <input 
+    
+        class="w-full h-10 rounded-2xl bg-white lg:bg-opacity-5 bg-opacity-20 pl-5 mt-8 search-icon" 
+        v-model="searchQuery"
+        type="text"
+        placeholder="Buscar serie..."
+        @keyup.enter="search" />
+    
+     
 
-  <form action="" class="w-full">
-    <input class="w-full h-10 rounded-2xl bg-white lg:bg-opacity-5 bg-opacity-20 pl-5 mt-8 search-icon" placeholder="Search" type="text" name="" id="" >
   </form>
 </template>

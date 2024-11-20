@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Reviews from "../components/principales/reviews/Reviews.vue";
 import HomePage from "../components/pages/HomePage.vue";
 import ReviewSerie from "../components/pages/ReviewSerie.vue";
-
+import SearchResults from "../components/pages/SearchResults.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -21,6 +21,11 @@ const router = createRouter({
             path: '/review-serie/:id',
             name: 'reviewSerie',
             component: ReviewSerie
+        },
+        {
+            path: '/buscar-serie/:serie',
+            name: 'buscarSerie',
+            component: SearchResults
         },
     ]
 })
