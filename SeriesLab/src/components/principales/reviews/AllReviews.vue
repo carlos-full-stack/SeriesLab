@@ -2,8 +2,8 @@
 import { storeToRefs } from 'pinia'
 import { Star, Edit, Trash2 } from 'lucide-vue-next'
 import { useReviewsFirestore } from '../../../../stores/reviewsFirestore.js'    
-import { computed} from 'vue';
-
+import { computed } from 'vue';
+import { useUserStore } from '../../../../stores/userStore.js';
 export default {
     props:{
         serieId:{
@@ -15,32 +15,42 @@ export default {
         const store = useReviewsFirestore()
         const { reviewsFirestore } = storeToRefs(store)
 
+        const userStore = useUserStore()
+        const { isLoggedIn } = storeToRefs(userStore)
+        
+        
         // Cargar las reviews inmediatamente
         store.readReviews()
 
         const filteredReviews = computed(() => {
             if (!reviewsFirestore.value || !Array.isArray(reviewsFirestore.value)) {
-                console.log('reviewsFirestore no es válido:', reviewsFirestore.value)
                 return []
             }
 
-            console.log('Filtrando reviews...')
-            const searchId = Number(props.serieId) // Convertir a número para comparar con serieId
-            console.log('ID a buscar:', searchId)
-            
+            const searchId = Number(props.serieId) // Convertir a número para comparar con serieId            
             const filtered = reviewsFirestore.value.filter(review => {
-                console.log('Review siendo evaluada:', review.serieId) // Usar serieId en lugar de idSerie
                 return review.serieId === searchId // Comparar números con números
             })
 
-            console.log('Reviews encontradas:', filtered.length)
             return filtered
         })
+
+        const editItem = (id) => {
+            console.log('Editando item con ID:', id)
+            userStore.setUser({email: 'rocio.valencia@oficina.biz'})
+        }
+
+        const deleteItem = (id) => {
+            console.log('Eliminando item con ID:', id)
+        }
 
         return {
             store,
             reviewsFirestore,
-            filteredReviews
+            filteredReviews,
+            isLoggedIn,
+            editItem,
+            deleteItem
         }
     },   
     
@@ -66,18 +76,20 @@ export default {
                             <data value="dateNow">{{ review.lastUpdate }}</data>
                         </span>
                         <div class="text-gray-300 text-sm">
-                             {{ review.username }}
+                             {{ review.userEmail }}
                         </div>
                     </div>
 
                     <div class="flex flex-row gap-2">
                         <button 
+                            v-if="isLoggedIn.value"
                             @click="editItem"
                             class="p-2 hover:bg-gray-700/30 rounded-full transition-colors"
                         >
                             <Edit class="w-5 h-5 stroke-white"/>
                         </button>
                         <button 
+                            v-if="isLoggedIn.value"
                             @click="deleteItem"
                             class="p-2 hover:bg-gray-700/30 rounded-full transition-colors"
                         >
