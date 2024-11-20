@@ -14,7 +14,7 @@ export const useLoginState = defineStore('state-widgets',{
 
         toggleMenuLogin(){
             this.showLoginMenu = !this.showLoginMenu
-            console.log(this.showLoginMenu);
+            // console.log(this.showLoginMenu);
             
         }
     }

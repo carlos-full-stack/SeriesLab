@@ -11,6 +11,8 @@ import SearchBar from './components/principales/widgets/SearchBar.vue'
 import LogInAuth from './components/principales/auth/LogInAuth.vue'
 import {useLoginState} from '../stores/stateWidgetsStore.js'
 import {  House, UserRound } from 'lucide-vue-next'
+import { monitorAuthState } from '../firebase/firebase.js'
+import { useUserStore } from '../stores/userStore.js'
 
 
 export default {
@@ -18,9 +20,12 @@ export default {
     setup(){
       const reviewsStore = useReviewsFirestore()
       const showLogIn = useLoginState()
+      const userStore = useUserStore();
+
       return {
         reviewsStore,
         showLogIn,
+        userStore,
       }
     },
 
@@ -44,10 +49,23 @@ export default {
             showSignup: false,
         }
     },
-    created(){
-      this.reviewsStore.readReviews()
-      console.log(`STATE: ${this.showLogIn}`);
+    mounted(){
+      this.reviewsStore.readReviews();
+      console.log(this.reviewsStore);
       
+
+      monitorAuthState((user) => {
+        if (user) {
+          this.userStore.setUser({
+            email: user.email,
+            uid: user.uid,
+          });
+          console.log(`Usuario loggeado: ${user.email}`);
+        } else {
+          userStore.clearUser();
+          console.log(`No hay un usuario loggeado`);
+        }
+});
       
     }
 }
@@ -56,7 +74,7 @@ export default {
 <template>
   <div class=" font-poppinsLight min-h-screen text-white bg-mainBackground flex lg:flex-row ">
 
-    <div v-if="showLogIn.showLoginMenu" class="fixed z-30 h-screen bg-backgroundColor bg-opacity-90 w-full ">
+    <!-- <div v-if="showLogIn.showLoginMenu" class="fixed z-30 h-screen bg-backgroundColor bg-opacity-90 w-full ">
       
       <LogInAuth/>
     </div>
@@ -67,12 +85,8 @@ export default {
         <button @click="showLogIn.toggleMenuLogin()" class=" px-5 hover:scale-110 transition-all duration-500 ease-in-out hover:text-primary">
           <UserRound /></button>
       </div>
-      <!-- <div class="">
-        <button @click="showLogIn.toggleMenuLogin()" class=" px-5 hover:scale-110 transition-all duration-500 ease-in-out hover:text-primary">
-          <House /> </button>
-      </div> -->
       
-    </div>
+    </div> -->
 
     <div class="fixed  left-1/3 right-5 lg:hidden">
       <SearchBar/>

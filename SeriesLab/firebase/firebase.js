@@ -3,6 +3,8 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDexpnAOQQAW04zYfdS1M9u1Ldol41Kbk0",
@@ -15,4 +17,12 @@ const firebaseConfig = {
 
 // Initialize Firebase - exportar para llamarlo en un componente
 export const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+
+// Listener global para cambios de autenticación
+export const monitorAuthState = (callback) => {
+  onAuthStateChanged(auth, callback);
+};
+
 
