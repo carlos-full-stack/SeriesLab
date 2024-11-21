@@ -97,7 +97,7 @@ export default {
       <RouterView/> 
     </div>
 
-    <div class="lg:w-1/4 lg:fixed  lg:top-0 lg:right-0 h-full ">
+    <div class="lg:w-1/4 lg:min-w-96 lg:fixed  lg:top-0 lg:right-0 h-full hidden lg:block ">
       <SideBarRight/>
       
     </div>

@@ -2,11 +2,7 @@
 
 import { RouterLink } from 'vue-router';
 
-const API_KEY = ''
-const query = ''
-const DB_BASE = 'https://api.themoviedb.org/3/search/tv?api_key='
-const LANGUAGE = 'es-ES';
-const DB = `${DB_BASE}${API_KEY}&query=${query}&language=${LANGUAGE}`
+
 
 export default {
 

@@ -93,7 +93,7 @@ export default {
 }
 </script>
 <template>
-    <div class="lg:px-20 h-20  flex flex-row justify-between items-center bg-gradient-to-b from-gray-900 to-transparent ">
+    <div class="lg:px-20 px-5 h-20 md:px-10  flex flex-row justify-between items-center bg-gradient-to-b from-gray-900 to-transparent ">
             <RouterLink to="/">
                 <LogoSeriesLab class="pt-1"/>
             </RouterLink>
@@ -101,13 +101,13 @@ export default {
 
     </div>
     
-    <div v-if="!loading" class=" min-h-[calc(100vh-14rem)] flex flex-col gap-4 justify-start pt-5 align-middle w-full lg:px-20">
+    <div v-if="!loading" class="md:px-10 px-5 min-h-[calc(100vh-14rem)] flex flex-col gap-4 justify-start pt-5 align-middle w-full lg:px-20">
         <div class="flex flex-row">
 
             <div  class="py-5">Resultados de la búsqueda:</div>
             <div  class=" py-5 text-primary ml-3 "> {{ query }}</div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5  gap-4 ">
 
             <div v-for="result in apiDataResults" :key="result.id">
                 <RouterLink :to="pathUrl+result.id" class="">
@@ -115,7 +115,7 @@ export default {
                 :idSerie="result.id"
                 :nombreSerie="result.name"
                 :srcImg="pathBaseSrcImg+result.poster_path"
-                :popularidad="result.popularity"
+                :rating="result.vote_average"
                 :anyoEmision="result.first_air_date.slice(0,4)"
                 :descripcionSerie="result.overview"
             />

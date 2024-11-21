@@ -26,18 +26,18 @@ export default {
     <div 
     :style="{backgroundImage: `url(${serie.srcUrl})`}" 
     class="w-full  bg-cover bg-center bg-no-repeat mb-0 ">
-        <div class="lg:px-20 px-5 lg:h-52 h-24 bg-gradient-to-r from-backgroundColor to-transparent pt-6 flex flex-col w-2/3">
+        <div class="lg:px-20 px-5 lg:h-24 h-24 bg-gradient-to-r from-backgroundColor to-transparent  pt-6 flex flex-col ">
          <LogoSeriesLab/>
-         <div class="py-5 lg:flex flex-row justify-between  mt-5 hidden ">
-             <h2 class=" flex align-middle text-3xl font-poppinsBold">{{ serie.name }}</h2>
+         <div class="py-5 lg:flex flex-row justify-between  gap-5 mt-5 hidden ">
+             <!-- <h2 class=" flex align-middle text-3xl font-poppinsBold w-full">{{ serie.name }}</h2> -->
              <div class="flex flex-row gap-2">
 
-                 <button class=" bg-primary hover:bg-secondary rounded-md px-4 py-2 text-sm transition-all duration-500 ease-in-out">Hacer Review</button>
-                 <button class=" bg-primary hover:bg-secondary rounded-md px-4 py-2 text-sm transition-all duration-500 ease-in-out">Ver Reviews</button>
+                 
+                 <!-- <p class="lg:flex text-xs hidden">{{ serie.desc }}</p> -->
+                 
              </div>
              
          </div>
-         <p class="lg:flex text-xs hidden">{{ serie.desc }}</p>
          </div>
     </div>
   
