@@ -5,6 +5,8 @@ import FormReviews from '../principales/reviews/FormReviews.vue';
 import TopReview from '../principales/reviews/TopReview.vue';
 import LoadingSpinner from '../principales/widgets/LoadingSpinner.vue'
 import { RouterLink } from 'vue-router';
+import CardResults from '../principales/cards/CardResults.vue';
+import LogoSeriesLab from '../principales/widgets/LogoSeriesLab.vue';
 
 
 export default {
@@ -32,6 +34,8 @@ export default {
         TopReview,
         FormReviews,
         LoadingSpinner,
+        CardResults,
+        LogoSeriesLab
       
     //   Footer,
     },
@@ -89,15 +93,41 @@ export default {
 }
 </script>
 <template>
-    
-    <div class=" min-h-[calc(100vh-14rem)] flex flex-col gap-4 justify-center align-middle w-full">
-<div class="mx-5 pt-5">Resultados de la búsqueda: {{ query }}</div>
-<div v-for="result in apiDataResults" :key="result.id">
-    <RouterLink :to="pathUrl+result.id" class="h-44 bg-secondaryBackground mx-5 rounded-2xl flex flex-row">
+    <div class="lg:px-20 h-20  flex flex-row justify-between items-center bg-gradient-to-b from-gray-900 to-transparent ">
+            <RouterLink to="/">
+                <LogoSeriesLab class="pt-1"/>
+            </RouterLink>
+            
 
-        <img :src="pathBaseSrcImg+result.poster_path" class="rounded-2xl" alt="">
-    </RouterLink>
-</div>
     </div>
-  
+    
+    <div v-if="!loading" class=" min-h-[calc(100vh-14rem)] flex flex-col gap-4 justify-start pt-5 align-middle w-full lg:px-20">
+        <div class="flex flex-row">
+
+            <div  class="py-5">Resultados de la búsqueda:</div>
+            <div  class=" py-5 text-primary ml-3 "> {{ query }}</div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
+
+            <div v-for="result in apiDataResults" :key="result.id">
+                <RouterLink :to="pathUrl+result.id" class="">
+                <CardResults
+                :idSerie="result.id"
+                :nombreSerie="result.name"
+                :srcImg="pathBaseSrcImg+result.poster_path"
+                :popularidad="result.popularity"
+                :anyoEmision="result.first_air_date.slice(0,4)"
+                :descripcionSerie="result.overview"
+            />
+                   
+                </RouterLink>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SPINNER -->
+    <div v-else class="min-h-[calc(100vh-14rem)] flex flex-col gap-4 justify-center items-center w-full ">
+        <LoadingSpinner/>
+    </div>
 </template>
