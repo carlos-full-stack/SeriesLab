@@ -2,8 +2,12 @@
 import { storeToRefs } from 'pinia'
 import { Star, Edit, Trash2 } from 'lucide-vue-next'
 import { useReviewsFirestore } from '../../../../stores/reviewsFirestore.js'    
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+import DeleteModal from './DeleteModal.vue';
 import { useUserStore } from '../../../../stores/userStore.js';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../../../../firebase/firebase.js';
+
 export default {
     props:{
         serieId:{
@@ -16,8 +20,47 @@ export default {
         const { reviewsFirestore } = storeToRefs(store)
 
         const userStore = useUserStore()
-        const { isLoggedIn } = storeToRefs(userStore)
+        const { isLoggedIn, userEmail } = storeToRefs(userStore)
         
+        const isDeleting = ref(false)
+        const showDeleteModal = ref(false)
+        const reviewToDelete = ref(null)
+
+        const confirmDelete = async(id) =>{
+            reviewToDelete.value = id
+            showDeleteModal.value = true
+        }
+
+        const handleDelete = async() =>{
+            if (!reviewToDelete.value) {
+                console.log('No hay ID para eliminar') 
+                return
+            }
+
+            isDeleting.value = true
+
+            try {
+                console.log('Intentando eliminar review:', reviewToDelete.value)
+                const reviewRef = doc(db, 'all-reviews-series', reviewToDelete.value)
+                await deleteDoc(reviewRef)
+                console.log('Review eliminada correctamente');
+                
+                // Actualizar el estado local después de eliminar
+                await store.readReviews()
+                showDeleteModal.value = false
+                
+            } catch (error) {
+                console.error('Error al borrar:', error)
+            } finally {
+                isDeleting.value = false
+                reviewToDelete.value = null
+            }
+        }
+
+        const closeDeleteModal = () => {            
+            showDeleteModal.value = false
+            reviewToDelete.value = null
+        }
         
         // Cargar las reviews inmediatamente
         store.readReviews()
@@ -35,37 +78,35 @@ export default {
             return filtered
         })
 
-        const editItem = (id) => {
-            console.log('Editando item con ID:', id)
-            userStore.setUser({email: 'rocio.valencia@oficina.biz'})
-        }
-
-        const deleteItem = (id) => {
-            console.log('Eliminando item con ID:', id)
-        }
 
         return {
             store,
             reviewsFirestore,
             filteredReviews,
             isLoggedIn,
-            editItem,
-            deleteItem
+            userEmail,
+            isDeleting,
+            showDeleteModal,
+            confirmDelete,
+            handleDelete,
+            closeDeleteModal
         }
     },   
     
     components:{
         Star,
         Edit,
-        Trash2
+        Trash2,
+        DeleteModal
     },
 }
+    
 </script>
 
 <template>
     <div>
         <div v-for="review in filteredReviews" :key="review.id" class="pt-4 h-auto lg:px-20">
-            <div class="rounded-2xl bg-secondaryBackground h-full flex flex-col p-6">
+            <div class="reviewrounded-2xl bg-secondaryBackground h-full flex flex-col p-6">
                 <div class="flex flex-row justify-between w-full items-center mb-4">
                     <div class="flex flex-row items-center gap-2">
                         <button>
@@ -82,26 +123,37 @@ export default {
 
                     <div class="flex flex-row gap-2">
                         <button 
-                            v-if="isLoggedIn.value"
-                            @click="editItem"
+                            v-if="isLoggedIn && userEmail === review.userEmail"
+                            @click="updateReview(review.id)"
                             class="p-2 hover:bg-gray-700/30 rounded-full transition-colors"
                         >
                             <Edit class="w-5 h-5 stroke-white"/>
                         </button>
+                        
                         <button 
-                            v-if="isLoggedIn.value"
-                            @click="deleteItem"
+                            v-if="isLoggedIn && userEmail === review.userEmail"
+                            @click="confirmDelete(review.id)"
+                            :disabled="isDeleting"
                             class="p-2 hover:bg-gray-700/30 rounded-full transition-colors"
                         >
                             <Trash2 class="w-5 h-5 stroke-white"/>
                         </button>
+                        
                     </div>
+                    
                 </div>
+                
 
                 <div class="text-gray-300 leading-relaxed">
                     {{ review.comment }}
                 </div>
             </div>
         </div>
+        <DeleteModal 
+            :is-open="showDeleteModal"
+            :is-deleting="isDeleting"
+            @close="closeDeleteModal"
+            @confirm="handleDelete"
+        />
     </div>
 </template>
