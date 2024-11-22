@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import {app} from '../firebase/firebase.js';
+import { app } from '../firebase/firebase.js';
 import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import UpdateReview from "../src/components/principales/reviews/UpdateReview.vue";
 
@@ -7,44 +7,57 @@ import UpdateReview from "../src/components/principales/reviews/UpdateReview.vue
 const db = getFirestore(app);
 
 //Traer todas las reviews de Firestore:
-async function getAllReviewsFirestore(){
-    const todasLasColecciones = collection(db,'all-reviews-series');
+async function getAllReviewsFirestore() {
+    const todasLasColecciones = collection(db, 'all-reviews-series');
     const todasSnapshot = await getDocs(todasLasColecciones);
-    const todasLasReviewsArray = todasSnapshot.docs.map(doc=>({
-        id:doc.id,
+    const todasLasReviewsArray = todasSnapshot.docs.map(doc => ({
+        id: doc.id,
         ...doc.data()
     }));
     return todasLasReviewsArray //Aquí devuelve un array de objetos (reviews) - es el "R"EAD del CRUD
 }
 
-export const useReviewsFirestore = defineStore('reviews',{
+export const useReviewsFirestore = defineStore('reviews', {
 
-    state:()=>({
+    state: () => ({
         //Todas las reviews de firestore (50 objetos):
-        reviewsFirestore:[]
+        reviewsFirestore: []
     }),
-    actions:{
+    actions: {
         //Read reviews:
-        async readReviews(){
+        async readReviews() {
             this.reviewsFirestore = await getAllReviewsFirestore();
             console.log('Reviews actualizadas:', this.reviewsFirestore);
             console.log(this.reviewsFirestore);
             
         },
-    
+
         //Crear review
-        createReview(reviewObjeto){
-            return 
+        async createReview({ creationDate, comment, rating, serieId, userEmail }) {
+            try {
+                await addDoc(collection(getFirestore(), 'all-reviews-series'), {
+                    creationDate: creationDate,
+                    comment: comment,
+                    rating: rating,
+                    serieId: serieId,
+                    userEmail: userEmail,
+                });
+                alert('Review almacenada con éxito');
+            } catch (e) {
+                console.error('Error al almacenar la review: ', e);
+            }
+
+            return
         },
-        
+
         //Actualizar review
-        updateReview(){
+        updateReview() {
             //filter contacto
             return
         },
-        
+
         //Borrar review
-        async deleteReview(reviewId){
+        async deleteReview(reviewId) {
             try {
                 const reviewRef = doc(db, 'all-reviews-series', reviewId);
                 await deleteDoc(reviewRef);
@@ -59,16 +72,16 @@ export const useReviewsFirestore = defineStore('reviews',{
         // Editar review
         async UpdateReview(reviewId, updatedReview) {
             try {
-              const reviewRef = doc(db, 'all-reviews-series', reviewId);
-              await updateDoc(reviewRef, updatedReview);
-          
-              // Actualizar el estado local después de la actualización
-              await this.readReviews();
-              return true;
+                const reviewRef = doc(db, 'all-reviews-series', reviewId);
+                await updateDoc(reviewRef, updatedReview);
+
+                // Actualizar el estado local después de la actualización
+                await this.readReviews();
+                return true;
             } catch (error) {
-              console.error('Error al actualizar la review:', error);
-              return false;
+                console.error('Error al actualizar la review:', error);
+                return false;
             }
-          }
+        }
     }
 })
