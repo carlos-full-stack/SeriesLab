@@ -93,9 +93,9 @@ export default {
                         <div class="border-gray-600 border-t my-3"></div>
 
                         <!-- puntuación -->
-                        <div class="flex flex-row justify-center h-full items-center   ">
+                        <div class="flex flex-row justify-start h-full items-center   ">
                             <div class=" "><Star color="#dcd62e" strokeWidth={1} fill="#dcd62e" width="30px"/></div>
-                            <div class="">
+                            <div class="text-2xl">
                                 {{ parseFloat(ranking.toFixed(1)) }}
                             </div>
                         </div>
