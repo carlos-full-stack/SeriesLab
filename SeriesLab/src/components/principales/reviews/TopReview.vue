@@ -42,8 +42,8 @@ export default {
 </script>
 
 <template>
-    <div class="h-96  flex flex-col pb-5 ">
-        <div class="lg:px-20 hidden  h-1/5 lg:flex lg:flex-row justify-between items-center bg-gradient-to-b from-gray-700 to-transparent ">
+    <div class="lg:h-96 pb-5  flex flex-col lg:pb-5  ">
+        <div class="lg:px-20 hidden  h-1/5 lg:flex lg:flex-row justify-between items-center bg-gradient-to-b from-gray-700 to-transparent  ">
             <RouterLink to="/">
                 <LogoSeriesLab class="pt-1"/>
             </RouterLink>
@@ -109,7 +109,7 @@ export default {
             
             <div class="pt-2 ">
 
-            <div class="pb-3">Sinópsis</div>
+            <div class="py-3 ">Sinópsis</div>
             <div class=" font-poppinsThin text-sm ">
             {{descripcionSerie }} 
             </div>

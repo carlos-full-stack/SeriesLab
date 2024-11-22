@@ -43,11 +43,6 @@ export default {
         async fetchReviewDetails() {
             try {
 
-                //Credenciales API:
-                // const API_KEY = 'de4b6461e071a300a503b91fb095113d'
-                // const LANGUAGE = 'es-ES'; // Idioma español de España
-                // const DB_ENDPOINT = `https://api.themoviedb.org/3/tv/${this.reviewId}?api_key=${API_KEY}&language=${LANGUAGE}`
-
                 const API_KEY = 'de4b6461e071a300a503b91fb095113d'
                 const DB_BASE = 'https://api.themoviedb.org/3/search/tv?api_key='
                 const LANGUAGE = 'es-ES';
@@ -58,7 +53,7 @@ export default {
 
                 this.apiDataResults = await res.json();
                 this.apiDataResults = this.apiDataResults.results
-                console.log(this.apiDataResults);
+                
                 
                 
                 
@@ -101,7 +96,7 @@ export default {
 }
 </script>
 <template>
-    <div class="lg:px-20 px-5 h-20 md:px-10  flex flex-row justify-between items-center bg-gradient-to-b from-gray-900 to-transparent ">
+    <div class="lg:px-20 hidden lg:block px-5 h-20 md:px-10 lg:py-5    flex-row justify-between items-center bg-gradient-to-b from-gray-900 to-transparent ">
             <RouterLink to="/">
                 <LogoSeriesLab class="pt-1"/>
             </RouterLink>
@@ -109,11 +104,11 @@ export default {
 
     </div>
     
-    <div v-if="!loading" class="md:px-10 px-5 min-h-[calc(100vh-14rem)] flex flex-col gap-4 justify-start pt-5 align-middle w-full lg:px-20">
+    <div v-if="!loading" class="md:px-10 px-5 min-h-[calc(100vh-14rem)] flex flex-col gap-4 justify-start lg:pt-5 align-middle w-full lg:px-20">
         <div class="flex flex-row">
 
-            <div  class="py-5">Resultados de la búsqueda:</div>
-            <div  class=" py-5 text-primary ml-3 "> {{ query }}</div>
+            <div  class="lg:py-5">Resultados de la búsqueda:</div>
+            <div  class=" lg:py-5 pb-3 text-primary ml-3 "> {{ query }}</div>
         </div>
         <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6  gap-4 ">
 

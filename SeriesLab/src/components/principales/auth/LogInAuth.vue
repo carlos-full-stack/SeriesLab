@@ -87,7 +87,7 @@ export default {
             </button>
             <button 
                 @click="toggleAuthMode"
-                class="text-sm mt-3 text-gray-600 hover:text-primary transition-all duration-500"
+                class="text-sm mt-3 text-gray-300 hover:text-primary transition-all duration-500"
             >
                 {{ isSignup ? '¿Ya tienes cuenta? Inicia sesión' : '¿No tienes cuenta? Regístrate' }}
             </button>

@@ -14,6 +14,7 @@ import {  House, UserRound } from 'lucide-vue-next'
 import { monitorAuthState } from '../firebase/firebase.js'
 import { useUserStore } from '../stores/userStore.js'
 import LogoSeriesLab from './components/principales/widgets/LogoSeriesLab.vue'
+import Login from './components/principales/widgets/Login.vue'
 
 
 export default {
@@ -41,6 +42,7 @@ export default {
       LogInAuth,
       UserRound,
       LogoSeriesLab,
+      Login
       
      
     },
@@ -95,6 +97,9 @@ export default {
         <LogoSeriesLab/>
       </RouterLink>
       <SearchBar/>
+    </div>
+    <div class="px-5 pt-2 lg:hidden ">
+      <Login/>
     </div>
 
     <div id='lef-side'class="lg:w-3/4 w-full mt-5 lg:mt-0  ">
