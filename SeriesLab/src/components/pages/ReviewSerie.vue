@@ -85,6 +85,7 @@ export default {
         :popularidad="reviewData.popularity"
         :fechaEmision="reviewData.first_air_date"
         :descripcionSerie="reviewData.overview"
+        :ranking="reviewData.vote_average"
         />
     </div>
     <!-- Contenedor LOADING -->

@@ -4,6 +4,7 @@ import {useUserStore} from '../../../../stores/userStore.js'
 import { useLoginState } from '../../../../stores/stateWidgetsStore.js';
 import {auth} from '../../../../firebase/firebase.js';
 import { signOut } from 'firebase/auth';
+import LoadingText from './LoadingText.vue';
 
 export default {
 
@@ -22,6 +23,7 @@ export default {
     components:{
       LogOut,
       UserRound,
+      LoadingText
     },
     data(){
         return{
@@ -41,9 +43,21 @@ export default {
         }catch(e){
           console.error(`Error cerrando la sesión: ${e}`);
         }
+      },
+       generarNickName (email){
+        let nickname = '@';
+
+        for(const char of email){
+          if(char == '@'){
+            break
+          }
+          nickname += char;
+        }
+        return nickname
       }
     
-    }
+    },
+    
 }
 </script>
 
@@ -56,8 +70,9 @@ export default {
       <!-- <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="rounded-full w-8 h-8" alt=""> -->
       <div class="flex flex-row gap-2">
         <span >Hola </span>
-        <span v-if="userStore.isLoggedIn" class="text-primary">{{userStore.userEmail}} </span>
-        <span v-else class="text-purple-300" >invitad@</span>
+        <span v-if="userStore.isLoggedIn" class="text-primary">{{generarNickName(userStore.userEmail)}} </span>
+        <span v-if="userStore.isLoggedIn == false" class="text-purple-300" >invitad@</span>
+        <span v-else class="text-purple-300" ><LoadingText/></span>
       </div>
       
       

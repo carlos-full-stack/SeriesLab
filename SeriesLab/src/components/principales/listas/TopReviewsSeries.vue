@@ -140,12 +140,7 @@ export default {
       </button>
     </div>       
 
-        <!-- Sin Carousel -->
-        <!-- <RouterLink v-if="arrayFromFirestore.length > 0"  v-for="serie in arrayFromFirestore" :to="pathUrl+serie.serieId" :key="serie.serieId" class=" mt-4 h-auto overflow-hidden shadow-lg shadow-black rounded-2xl">
-        <img :src="serie.srcImage" :alt="serie.serieName" class=" w-48 h-full object-cover rounded-2xl">
-      
-        </RouterLink> -->
-
+   
         <!-- Spinner si no hay datos -->
         <div v-else  class="flex h-80 flex-col justify-center items-center w-full">
           <LoadingSpinner/>
