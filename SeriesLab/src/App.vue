@@ -13,6 +13,7 @@ import {useLoginState} from '../stores/stateWidgetsStore.js'
 import {  House, UserRound } from 'lucide-vue-next'
 import { monitorAuthState } from '../firebase/firebase.js'
 import { useUserStore } from '../stores/userStore.js'
+import LogoSeriesLab from './components/principales/widgets/LogoSeriesLab.vue'
 
 
 export default {
@@ -39,7 +40,7 @@ export default {
       SearchBar,
       LogInAuth,
       UserRound,
-      House
+      LogoSeriesLab,
       
      
     },
@@ -72,7 +73,7 @@ export default {
 </script>
 
 <template>
-  <div class=" font-poppinsLight min-h-screen text-white bg-mainBackground flex lg:flex-row ">
+  <div class=" font-poppinsLight min-h-screen text-white bg-mainBackground flex lg:flex-row flex-col ">
 
     <div v-if="showLogIn.showLoginMenu" class="fixed z-30 h-screen bg-backgroundColor bg-opacity-90 w-full ">
       
@@ -88,16 +89,20 @@ export default {
       
     </div> -->
 
-    <div class="fixed  left-1/3 right-5 lg:hidden">
+    <div class="bg-cover  items-center gap-7 bg-center bg-no-repeat h-28 px-5 flex flex-row justify-between lg:hidden " :style="{backgroundImage: `url(https://static.hbo.com/content/dam/hbodata/series/the-wire/ka/the-wire-ka-1920.jpg)`}" >
+      <RouterLink to="/">
+
+        <LogoSeriesLab/>
+      </RouterLink>
       <SearchBar/>
     </div>
 
-    <div id='lef-side'class="lg:w-3/4 w-full   ">
+    <div id='lef-side'class="lg:w-3/4 w-full mt-5 lg:mt-0  ">
       
       <RouterView/> 
     </div>
 
-    <div class="lg:w-1/4 lg:fixed  lg:top-0 lg:right-0 h-full ">
+    <div class="lg:w-1/4 lg:min-w-[230px]  lg:fixed  lg:top-0 lg:right-0 h-full hidden lg:block ">
       <SideBarRight/>
       
     </div>

@@ -2,6 +2,8 @@
 //Aquí importamos el componente Title
 
 import { RouterLink } from 'vue-router';
+import CardResults from '../cards/CardResults.vue';
+import LoadingSpinner from '../widgets/LoadingSpinner.vue';
 
 export default {
     props:{
@@ -14,6 +16,8 @@ export default {
 
   //Aquí llamamos a todos los componentes
     components:{
+      CardResults,
+      LoadingSpinner
      
     },
     data(){
@@ -29,20 +33,30 @@ export default {
 
 <template>
   
-  <div class="lg:pl-20 pl-5 font-poppinsLight  text-white flex flex-col pb-8 ">
+  <div class="lg:px-20  px-5 font-poppinsLight  text-white flex flex-col pb-8 ">
    
    
-     <h2 class=" text-xl ">Top Rated series</h2>
-     <div class="flex lg:flex-row flex-shrink lg:w-full lg:h-auto lg:justify-between pr-5">
-    
-        <RouterLink v-if="arrayFromData.length > 0"  v-for="serie in arrayFromData" :to="pathUrl+serie.id" :key="serie.id" class=" mt-4 h-36 w-28 overflow-hidden shadow-lg shadow-black rounded-2xl hover:scale-105 transition-all ease-in-out duration-100">
-        <img :src="pathBaseSrcImg+serie.poster_path" :alt="serie.name" class="w-full h-full object-cover rounded-2xl ">
-        </RouterLink>
-
-        <div v-else>
-          <div class="bg-red-400">NO DATA</div>
+     <h2 class=" text-lg pb-6">Top Rated series</h2>
+     
+     <div v-if="arrayFromData.length > 0" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-2 lg:gap-3 ">
+     <div v-for="result in arrayFromData" :key="result.id">
+                <RouterLink :to="pathUrl+result.id" class="">
+                <CardResults
+                :idSerie="result.id"
+                :nombreSerie="result.name"
+                :srcImg="pathBaseSrcImg+result.poster_path"
+                :rating="result.vote_average"
+                :anyoEmision="result.first_air_date.slice(0,4)"
+                :descripcionSerie="result.overview"
+            />
+                   
+                </RouterLink>
+            </div>
+      </div>
+      <div v-else  class="flex h-80 flex-col justify-center items-center w-full">
+          <LoadingSpinner/>
         </div>
-     </div>
+
 
   </div>
 </template>

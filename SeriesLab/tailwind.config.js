@@ -19,6 +19,11 @@ export default {
         secondaryBackground: '#2B2C3E',
         sideBarBg: '#222433'
       },
+      backgroundImage:{
+        
+        'banner-bg': "url('/assets/img/fondos/B2037067-9082-4206-96F5-32DF3E6C4289.jpg')",
+        
+      },
       fontFamily: {
         poppinsBlack: 'poppins-black',
         poppinsExtraBold: 'poppins-extrabold',

@@ -97,9 +97,9 @@ export default {
 
   <div class=" font-poppinsLight  text-white flex flex-col   ">
    
-     <h2 v-if="arrayFromFirestore.length > 0" class="text-xl lg:pl-20 pl-5">Top Reviews </h2>
+     <h2 v-if="arrayFromFirestore.length > 0" class="text-lg lg:pl-20 pl-5  ">Top Reviews </h2>
      
-     <div class="flex flex-row gap-4 w-full h-auto justify-between ">
+     <div class="flex flex-row gap-4 w-full h-auto   ">
 
    
           <!-- Carrusel -->
@@ -107,7 +107,7 @@ export default {
 
       <div  class="relative overflow-hidden w-full h-auto ">
         <div
-          class="flex flex-row justify-between transition-transform duration-500 ease-in-out lg:pl-20 pl-5   py-7 relative"
+          class="flex flex-row justify-between transition-transform duration-500 ease-in-out lg:pl-20 pl-5   py-5 relative"
           :style="{ transform: `translateX(-${currentIndex * (100 / slidesToShow)}%)` }"
         >
          
@@ -140,12 +140,7 @@ export default {
       </button>
     </div>       
 
-        <!-- Sin Carousel -->
-        <!-- <RouterLink v-if="arrayFromFirestore.length > 0"  v-for="serie in arrayFromFirestore" :to="pathUrl+serie.serieId" :key="serie.serieId" class=" mt-4 h-auto overflow-hidden shadow-lg shadow-black rounded-2xl">
-        <img :src="serie.srcImage" :alt="serie.serieName" class=" w-48 h-full object-cover rounded-2xl">
-      
-        </RouterLink> -->
-
+   
         <!-- Spinner si no hay datos -->
         <div v-else  class="flex h-80 flex-col justify-center items-center w-full">
           <LoadingSpinner/>

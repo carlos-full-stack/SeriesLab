@@ -1,5 +1,7 @@
 <script >
-//Aquí importamos el componente Title
+
+import { RouterLink } from 'vue-router';
+
 
 
 export default {
@@ -10,9 +12,28 @@ export default {
     },
     data(){
         return{
-            
+          searchQuery: '',
+          pathUrl: '/buscar-serie/'
         }
     },
+    methods:{
+
+      search() {
+      if (this.searchQuery.trim()) {
+
+        // Reemplazo espacios por "+":
+        const formattedQuery = this.searchQuery.trim().replace(/\s+/g, '+');
+
+        // Redirigo a la ruta /buscar-serie con la query formateada:
+        this.$router.push({
+          name: 'buscarSerie',
+          params: { serie: formattedQuery },
+        });
+      } else {
+        console.log('El campo de búsqueda está vacío');
+      }
+    },
+    }
 }
 </script>
 
@@ -29,14 +50,17 @@ export default {
 </style>
 
 <template>
-  <!-- <div class="my-5 font-poppinsLight h-96 text-white flex flex-col bg-secondaryBackground">
-   
-     <h2>Top rated series</h2>
-     <div>Aquí va la lista v-for</div>
 
-  </div> -->
+  <form @submit.prevent class="w-full">
+    <input 
+    
+        class="w-full h-10 rounded-2xl lg:text-white text-gray-900 bg-white lg:bg-opacity-5 bg-opacity-80 pl-5 lg:mt-8 search-icon " 
+        v-model="searchQuery"
+        type="text"
+        placeholder="Buscar serie..."
+        @keyup.enter="search" />
+    
+     
 
-  <form action="" class="w-full">
-    <input class="w-full h-10 rounded-2xl bg-white lg:bg-opacity-5 bg-opacity-20 pl-5 mt-8 search-icon" placeholder="Search" type="text" name="" id="" >
   </form>
 </template>
