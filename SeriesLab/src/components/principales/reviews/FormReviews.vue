@@ -2,6 +2,7 @@
 import { Star } from 'lucide-vue-next';
 import Button from '../buttons/Button.vue';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { useReviewsFirestore } from '../../../../stores/reviewsFirestore.js'
 import { useUserStore } from '../../../../stores/userStore.js';
 
 
@@ -11,8 +12,12 @@ export default {
     
     setup() {
         
+        const useReviews = useReviewsFirestore();
         const useUser = useUserStore();
-
+return{
+  useReviews,
+  useUser
+}
   },
 
   components: {
@@ -35,24 +40,48 @@ export default {
   },
   data() {
     return {
-
-    review: {
+      id:'',
       date: '',
       review: '',
       rating: '',
-      userEmail: '',
-      username: ''
-    },
+      userEmail: '',  
+      username: '',
+      objetoReview:{
+        fecha: '',
+        comentario: '',
+        rate: '',
+        idSerie: '',
+        emailUsuario: '',
+      },
+   
 }
   },
   methods: {
     getCurrentData() {
       this.date = new Date().toLocaleDateString();
     },
-    async submitReview( { creationDate, comment, rating, serieId, userEmail }) {
-        this.userStore.createReview({ creationDate, comment, rating, serieId, userEmail })
+    async submitReview() {
+      this.objetoReview = {
+      fecha : this.date,
+      comentario : this.review,
+      rate : this.rating,
+      idSerie : this.serieId,
+      emailUsuario : this.useUser.isLoggedIn ? this.useUser.userEmail : 'Invitado',
+    }
 
-        console.log(userEmail);
+      console.log(this.objetoReview);
+      
+      try{
+        await this.useReviews.createReview(this.objetoReview)
+        console.log('review enviada');
+        
+      }catch{
+        console.log('nuevamente un ERROR');
+        
+      }
+        
+
+        // console.log(userEmail);
         
 
     },
@@ -60,7 +89,17 @@ export default {
 
 
   mounted() {
-    this.getCurrentData();
+
+   this.getCurrentData()
+   console.log(this.date);
+   
+    this.id = this.serieId
+    console.log(`Prueba : ${this.id}`);
+   
+    console.log(this.objetoReview);
+    
+    
+    
   }
 };
 </script>
@@ -88,7 +127,7 @@ export default {
           </div>
           <button><Star color="#dcd62e" strokeWidth={3} fill="#dcd62e" /></button>
         </div>
-        <span v-if="userStore.isLoggedIn" class="text-primary">{{userStore.userEmail}} </span>
+        <span v-if="useUser.isLoggedIn" class="text-primary">{{useUser.userEmail}} </span>
         <span v-else class="text-purple-300" >invitad@</span>
         <span class="text-center">{{ date }}</span>
       </div>

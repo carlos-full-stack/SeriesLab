@@ -60,8 +60,8 @@ export default {
         this.fetchReviewDetails(); // Llamar a la API
 
 
-        console.log(`La variable reviewId es de ${this.reviewId}`);
-        console.log(`La variable nombreSerie es de ${this.reviewData.name}`);
+        // console.log(`La variable reviewId es de ${this.reviewId}`);
+        // console.log(`La variable nombreSerie es de ${this.reviewData.name}`);
         
         
     },
@@ -96,6 +96,7 @@ export default {
 
     
     <FormReviews 
+   
     :serieId="reviewId" 
     :nombreSerie="reviewData.name" 
     :srcImg="reviewData.profile_path"

@@ -33,14 +33,16 @@ export const useReviewsFirestore = defineStore('reviews', {
         },
 
         //Crear review
-        async createReview({ creationDate, comment, rating, serieId, userEmail }) {
+        async createReview({ objetoReview }) {
+            console.log('CREANDO REVIEW');
+            
             try {
                 await addDoc(collection(getFirestore(), 'all-reviews-series'), {
-                    creationDate: creationDate,
-                    comment: comment,
-                    rating: rating,
-                    serieId: serieId,
-                    userEmail: userEmail,
+                    creationDate: objetoReview.fecha,
+                    comment: objetoReview.comentario,
+                    rating: objetoReview.rate,
+                    serieId: objetoReview.idSerie,
+                    userEmail: objetoReview.emailUsuario,
                 });
                 alert('Review almacenada con éxito');
             } catch (e) {
