@@ -27,6 +27,7 @@ export const useReviewsFirestore = defineStore('reviews', {
         //Read reviews:
         async readReviews() {
             this.reviewsFirestore = await getAllReviewsFirestore();
+
             console.log('Reviews actualizadas:', this.reviewsFirestore);
             console.log(this.reviewsFirestore);
             
@@ -45,6 +46,7 @@ export const useReviewsFirestore = defineStore('reviews', {
                     userEmail: objetoReview.emailUsuario,
                 });
                 alert('Review almacenada con éxito');
+                await this.readReviews()
             } catch (e) {
                 console.error('Error al almacenar la review: ', e);
             }

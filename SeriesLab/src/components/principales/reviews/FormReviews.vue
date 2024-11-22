@@ -64,8 +64,8 @@ return{
       this.objetoReview = {
       fecha : this.date,
       comentario : this.review,
-      rate : this.rating,
-      idSerie : this.serieId,
+      rate : Number(this.rating),
+      idSerie : Number(this.serieId),
       emailUsuario : this.useUser.isLoggedIn ? this.useUser.userEmail : 'Invitado',
     }
 
@@ -73,23 +73,20 @@ return{
       
       try{
         await this.useReviews.createReview({objetoReview :this.objetoReview})
+        // Limpiar el formulario después de enviar
+        this.review = '';
+        this.rating = '';
         console.log('review enviada');
         
       }catch{
         console.log('nuevamente un ERROR');
         
       }
-        
-
-        // console.log(userEmail);
-        
-
     },
   },
 
 
   mounted() {
-
    this.getCurrentData()
    console.log(this.date);
    
@@ -97,9 +94,6 @@ return{
     console.log(`Prueba : ${this.id}`);
    
     console.log(this.objetoReview);
-    
-    
-    
   }
 };
 </script>
