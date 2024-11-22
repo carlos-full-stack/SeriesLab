@@ -12,7 +12,7 @@ export default {
  data(){
     return{
         reviewId: null, // Almacena el ID recibido por URL
-        reviewData: null, // Almacena los datos de la API
+        reviewData: {}, // Almacena los datos de la API
         loading: true, // Estado de carga
         error: null,
         pathBaseSrcImg:'https://image.tmdb.org/t/p/w200/',
@@ -36,30 +36,19 @@ export default {
     },
     methods:{
         async fetchReviewDetails() {
-            try {
-
-                //Credenciales API:
-                const API_KEY = 'de4b6461e071a300a503b91fb095113d'
-                const LANGUAGE = 'es-ES'; // Idioma español de España
-                const DB_ENDPOINT = `https://api.themoviedb.org/3/tv/${this.reviewId}?api_key=${API_KEY}&language=${LANGUAGE}`
-
-                const res = await fetch(DB_ENDPOINT)
-                if(!res){throw new Error("Error al obtener los datos");}
-
-                this.reviewData = await res.json();
-
-            } catch (err) {
-                this.error = err.message;
-                console.error("Error en la API:", err);
-            } finally {
-                // Cambiar estado de carga en 1 segundo
-                setTimeout (()=>{
-                     
-                    this.loading = false;
-                },1000)
-                
-            }
-        },
+      try {
+        const API_KEY = 'de4b6461e071a300a503b91fb095113d';
+        const LANGUAGE = 'es-ES'; // Idioma español de España
+        const DB_ENDPOINT = `https://api.themoviedb.org/3/tv/${this.reviewId}?api_key=${API_KEY}&language=${LANGUAGE}`;
+        const response = await fetch(DB_ENDPOINT);
+        const data = await response.json();
+        this.reviewData = data;
+        this.loading = false;
+      } catch (error) {
+        console.error('Error fetching review details:', error);
+        this.loading = false;
+      }
+    }
     },
     mounted() {
 
@@ -69,9 +58,18 @@ export default {
        
         // Asignar el ID recibido a la propiedad `reviewId`
         this.fetchReviewDetails(); // Llamar a la API
+
+
+        console.log(`La variable reviewId es de ${this.reviewId}`);
+        console.log(`La variable nombreSerie es de ${this.reviewData.name}`);
+        
+        
     },
     
 }
+
+
+
 </script>
 <template>
     
@@ -94,8 +92,13 @@ export default {
         </div>
         
     </div>
+
     
-    <FormReviews />
+    <FormReviews 
+    :serieId="reviewId" 
+    :nombreSerie="reviewData.name" 
+    :srcImg="reviewData.profile_path"
+     />
     <AllReviews 
    :serieId="String(reviewId)"
     />
