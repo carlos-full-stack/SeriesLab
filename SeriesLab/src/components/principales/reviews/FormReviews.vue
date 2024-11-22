@@ -4,7 +4,17 @@ import Button from '../buttons/Button.vue';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { useUserStore } from '../../../../stores/userStore.js';
 
+
+
+
 export default {
+    
+    setup() {
+        
+        const useUser = useUserStore();
+
+  },
+
   components: {
     Button,
     Star
@@ -25,31 +35,26 @@ export default {
   },
   data() {
     return {
-      userStore: useUserStore(),
+
+    review: {
       date: '',
       review: '',
       rating: '',
       userEmail: '',
       username: ''
-    };
+    },
+}
   },
   methods: {
     getCurrentData() {
       this.date = new Date().toLocaleDateString();
     },
-    async submitReview() {
-      try {
-        await addDoc(collection(getFirestore(), 'reviews'), {
-          creationDate: this.date,
-          comment: this.review,
-          rating: this.rating,
-          serieId: this.serieId,
-          userEmail: this.userStore.userEmail,
-        });
-        alert('Review almacenada con éxito');
-      } catch (e) {
-        console.error('Error al almacenar la review: ', e);
-      }
+    async submitReview( { creationDate, comment, rating, serieId, userEmail }) {
+        this.userStore.createReview({ creationDate, comment, rating, serieId, userEmail })
+
+        console.log(userEmail);
+        
+
     },
   },
 
@@ -88,7 +93,7 @@ export default {
         <span class="text-center">{{ date }}</span>
       </div>
       <textarea v-model="review" class="col-span-3 mt-10 mb-5 mx-10 rounded bg-mainBackground h-40 text-gray-100 pt-3 pl-3" name="" id="" placeholder="Escribe tu review"></textarea>
-      <div class="col-span-3 flex justify-center mb-5"><Button @click="submitReview" buttonText="Enviar"></Button></div>
+      <div class="col-span-3 flex justify-center mb-5"><Button @click="submitReview( { serieId })" buttonText="Enviar"></Button></div>
     </div>
   </div>
 </template>
