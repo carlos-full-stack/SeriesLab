@@ -81,6 +81,7 @@ export default {
         // Obtener el parámetro de la URL
         const route = useRoute(); 
         this.query = route.params.serie; 
+        this.query = this.query.replaceAll('+', ' ')
        
         // Asignar el ID recibido a la propiedad `reviewId`
         this.fetchReviewDetails(); // Llamar a la API
@@ -89,6 +90,13 @@ export default {
         
         
     },
+    watch: {
+    // Detectar cambios en los parámetros de la ruta
+    '$route.params.serie'(newQuery) {
+      this.query = newQuery; // Actualizar la query
+      this.fetchReviewDetails(); // Volver a buscar
+    },
+  },
     
 }
 </script>
@@ -107,7 +115,7 @@ export default {
             <div  class="py-5">Resultados de la búsqueda:</div>
             <div  class=" py-5 text-primary ml-3 "> {{ query }}</div>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5  gap-4 ">
+        <div class="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6  gap-4 ">
 
             <div v-for="result in apiDataResults" :key="result.id">
                 <RouterLink :to="pathUrl+result.id" class="">

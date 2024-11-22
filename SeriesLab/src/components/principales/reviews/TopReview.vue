@@ -42,16 +42,16 @@ export default {
 
 
     <div class="h-96  flex flex-col pb-5 ">
-        <div class="lg:px-20 h-1/5 flex flex-row justify-between items-center bg-gradient-to-b from-gray-700 to-transparent ">
+        <div class="lg:px-20 hidden l h-1/5 lg:flex lg:flex-row justify-between items-center bg-gradient-to-b from-gray-700 to-transparent ">
             <RouterLink to="/">
                 <LogoSeriesLab class="pt-1"/>
             </RouterLink>
             
-            <div class="text-3xl font-poppinsBold tracking-widest">{{ nombreSerie }}
-            </div>
+            <!-- <div class="text-3xl font-poppinsBold tracking-widest">{{ nombreSerie }}
+            </div> -->
 
         </div>
-        <div class=" lg:px-20 h-4/5 flex flex-row w-full  ">
+        <div class=" lg:px-20 px-5 h-4/5 flex flex-row w-full  ">
 
             <!-- IMAGEN -->
             <div class="w-1/5 shadow-md shadow-black rounded-3xl">

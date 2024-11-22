@@ -49,12 +49,12 @@ export default {
                 <div class="flex flex-row items-center ">
 
                     <Star color="#dcd62e" strokeWidth={3} fill="#dcd62e" width="15px"/>
-                    <div class=" pl-1 text-sm text-gray-400  font-poppinsRegular ">{{ rating}}</div>
+                    <div class=" pl-1 text-sm text-gray-400  font-poppinsRegular ">{{ parseFloat(rating.toFixed(1))}}</div>
                 </div>
                 <div class=" text-sm text-gray-400  font-poppinsRegular  ">{{ anyoEmision }}</div>
 
             </div>
-            <div class="w-full  text-sm font-poppinsMedium  pt-2 h-16 ">{{ nombreSerie.slice(0,35 ) }}</div>
+            <div class="w-full  text-xs font-poppinsRegular  pt-2 h-16 ">{{ nombreSerie.slice(0,35 ) }}</div>
             
             <!-- <div class="w-full  text-xs font-poppinsThin h-16">{{ descripcionSerie.slice(0,80)+'...' }}</div> -->
             

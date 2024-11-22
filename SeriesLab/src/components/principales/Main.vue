@@ -62,7 +62,10 @@ export default {
             fetch(DB_TOP_RATED)
             .then(res=>res.json())
             .then(data=>{
-                this.arrayTopRated = data.results.slice(0,6)
+                setTimeout(()=>{
+                    this.arrayTopRated = data.results.slice(0,6)
+                },1000)
+                
                 
             })
 

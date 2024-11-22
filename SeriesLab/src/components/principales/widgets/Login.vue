@@ -51,7 +51,7 @@ export default {
 <div class="grid grid-cols-2 gap-y-2 w-full text-sm">
 
 
-  <div class="flex col-span-2 justify-between mb-2  text-sm">
+  <div class="flex col-span-2 justify-between mb-2  text-xs">
     <div class="flex flex-row items-center justify-center gap-x-3 ">
       <!-- <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="rounded-full w-8 h-8" alt=""> -->
       <div class="flex flex-row gap-2">
@@ -66,13 +66,13 @@ export default {
     <button v-if="userStore.isLoggedIn" @click="logout" class="hover:text-purple-300 transition-all duration-500" >
       <LogOut />
     </button>
-    <button v-else @click="showLogIn.toggleMenuLogin()" class="text-sm text-purple-300  hover:text-primary transition-all duration-500">
+    <button v-else @click="showLogIn.toggleMenuLogin()" class="text-xs text-purple-300  hover:text-primary transition-all duration-500">
       Log In
     </button>
   </div>
-  <span class="">Total reviews</span>
-  <span class="text-right">8</span>
-  <span class="text-sm">Votos</span>
-  <span class="text-right">4</span>
+  <span class="text-xs">Total reviews</span>
+  <span class="text-right text-xs">8</span>
+  <span class="text-xs">Votos</span>
+  <span class="text-right text-xs">4</span>
 </div>
 </template>

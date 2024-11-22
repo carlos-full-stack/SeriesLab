@@ -20,10 +20,14 @@ export default {
 
       search() {
       if (this.searchQuery.trim()) {
-        // Redirigimos a la ruta /buscar-serie con el término de búsqueda
+
+        // Reemplazo espacios por "+":
+        const formattedQuery = this.searchQuery.trim().replace(/\s+/g, '+');
+
+        // Redirigo a la ruta /buscar-serie con la query formateada:
         this.$router.push({
           name: 'buscarSerie',
-          params: { serie: this.searchQuery },
+          params: { serie: formattedQuery },
         });
       } else {
         console.log('El campo de búsqueda está vacío');
@@ -50,7 +54,7 @@ export default {
   <form @submit.prevent class="w-full">
     <input 
     
-        class="w-full h-10 rounded-2xl bg-white lg:bg-opacity-5 bg-opacity-20 pl-5 mt-8 search-icon" 
+        class="w-full h-10 rounded-2xl lg:text-white text-gray-900 bg-white lg:bg-opacity-5 bg-opacity-80 pl-5 lg:mt-8 search-icon " 
         v-model="searchQuery"
         type="text"
         placeholder="Buscar serie..."

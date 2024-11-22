@@ -25,7 +25,7 @@ export default {
 <template>
     <div 
     :style="{backgroundImage: `url(${serie.srcUrl})`}" 
-    class="w-full  bg-cover bg-center bg-no-repeat mb-0 ">
+    class="w-full  bg-cover bg-center bg-no-repeat mb-0 hidden lg:block ">
         <div class="lg:px-20 px-5 lg:h-24 h-24 bg-gradient-to-r from-backgroundColor to-transparent  pt-6 flex flex-col ">
          <LogoSeriesLab/>
          <div class="py-5 lg:flex flex-row justify-between  gap-5 mt-5 hidden ">
