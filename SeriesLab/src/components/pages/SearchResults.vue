@@ -43,11 +43,6 @@ export default {
         async fetchReviewDetails() {
             try {
 
-                //Credenciales API:
-                // const API_KEY = 'de4b6461e071a300a503b91fb095113d'
-                // const LANGUAGE = 'es-ES'; // Idioma español de España
-                // const DB_ENDPOINT = `https://api.themoviedb.org/3/tv/${this.reviewId}?api_key=${API_KEY}&language=${LANGUAGE}`
-
                 const API_KEY = 'de4b6461e071a300a503b91fb095113d'
                 const DB_BASE = 'https://api.themoviedb.org/3/search/tv?api_key='
                 const LANGUAGE = 'es-ES';
@@ -58,7 +53,7 @@ export default {
 
                 this.apiDataResults = await res.json();
                 this.apiDataResults = this.apiDataResults.results
-                console.log(this.apiDataResults);
+                
                 
                 
                 
@@ -101,7 +96,7 @@ export default {
 }
 </script>
 <template>
-    <div class="lg:px-20 px-5 h-20 md:px-10  flex flex-row justify-between items-center bg-gradient-to-b from-gray-900 to-transparent ">
+    <div class="lg:px-20 hidden px-5 h-20 md:px-10   flex-row justify-between items-center bg-gradient-to-b from-gray-900 to-transparent ">
             <RouterLink to="/">
                 <LogoSeriesLab class="pt-1"/>
             </RouterLink>
