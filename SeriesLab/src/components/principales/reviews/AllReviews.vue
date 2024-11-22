@@ -1,11 +1,10 @@
 <script>
-import { storeToRefs } from "pinia";
+import { mapState } from "pinia";
 import { Star, Edit, Trash2 } from "lucide-vue-next";
 import { useReviewsFirestore } from "../../../../stores/reviewsFirestore.js";
-import { computed, ref } from "vue";
 import DeleteModal from "./DeleteModal.vue";
 import { useUserStore } from "../../../../stores/userStore.js";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase.js";
 import UpdateReview from "./UpdateReview.vue";
 
@@ -16,136 +15,111 @@ export default {
       required: true,
     },
   },
-  setup(props) {
-    const store = useReviewsFirestore();
-    const { reviewsFirestore } = storeToRefs(store);
-
-    const userStore = useUserStore();
-    const { isLoggedIn, userEmail } = storeToRefs(userStore);
-
-    const isDeleting = ref(false);
-    const showDeleteModal = ref(false);
-    const reviewToDelete = ref(null);
-
-    const isUpdating = ref(false);
-    const showEditModal = ref(false);
-    const reviewToUpdate = ref(null);
-    const selectedReview = ref(null);
-
-    const confirmDelete = async (id) => {
-      reviewToDelete.value = id;
-      showDeleteModal.value = true;
+  data() {
+    return {
+      isDeleting: false,
+      showDeleteModal: false,
+      reviewToDelete: null,
+      isUpdating: false,
+      showEditModal: false,
+      reviewToUpdate: null,
+      selectedReview: null,
+      formattedDate: new Date().toLocaleDateString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+        year: "numeric",
+      }),
     };
-
-    const updateReview = async (review) => {
-      reviewToUpdate.value = review.id;
-      selectedReview.value = review;
-      showEditModal.value = true;
-    };
-
-    const handleDelete = async () => {
-      if (!reviewToDelete.value) {
+  },
+  computed: {
+    ...mapState(useReviewsFirestore, ["reviewsFirestore"]),
+    ...mapState(useUserStore, ["isLoggedIn", "userEmail"]),
+    filteredReviews() {
+      if (!this.reviewsFirestore || !Array.isArray(this.reviewsFirestore)) {
+        return [];
+      }
+      const searchId = Number(this.serieId);
+      return this.reviewsFirestore.filter((review) =>  {
+        return review.serieId === Number(this.serieId);
+      }
+      );
+    },
+  },
+  methods: {
+    confirmDelete(id) {
+      this.reviewToDelete = id;
+      this.showDeleteModal = true;
+    },
+    async handleDelete() {
+      if (!this.reviewToDelete) {
         console.log("No hay ID para eliminar");
         return;
       }
 
-      isDeleting.value = true;
+      this.isDeleting = true;
 
       try {
-        console.log("Intentando eliminar review:", reviewToDelete.value);
-        const reviewRef = doc(db, "all-reviews-series", reviewToDelete.value);
+        console.log("Intentando eliminar review:", this.reviewToDelete);
+        const reviewRef = doc(db, "all-reviews-series", this.reviewToDelete);
         await deleteDoc(reviewRef);
         console.log("Review eliminada correctamente");
 
         // Actualizar el estado local después de eliminar
+        const store = useReviewsFirestore();
         await store.readReviews();
-        showDeleteModal.value = false;
+        this.showDeleteModal = false;
       } catch (error) {
         console.error("Error al borrar:", error);
       } finally {
-        isDeleting.value = false;
-        reviewToDelete.value = null;
+        this.isDeleting = false;
+        this.reviewToDelete = null;
       }
-    };
-
-    const handleUpdate = async (updatedData) => {
-      if (!reviewToUpdate.value) {
+    },
+    closeDeleteModal() {
+      this.showDeleteModal = false;
+      this.reviewToDelete = null;
+    },
+    updateReview(review) {
+      this.reviewToUpdate = review.id;
+      this.selectedReview = review;
+      this.showEditModal = true;
+    },
+    async handleUpdate(updatedData) {
+      if (!this.reviewToUpdate) {
         console.log("No hay ID para actualizar");
         return;
       }
 
-      isUpdating.value = true;
+      this.isUpdating = true;
 
       try {
-        await store.UpdateReview(reviewToUpdate.value, {
+        const store = useReviewsFirestore();
+        await store.UpdateReview(this.reviewToUpdate, {
           comment: updatedData.comment,
           rating: updatedData.rating,
-          lastUpdate: formattedDate,
-          userEmail: userEmail.value,
+          lastUpdate: this.formattedDate,
+          userEmail: this.userEmail,
         });
-        showEditModal.value = false;
+        this.showEditModal = false;
       } catch (error) {
         console.error("Error al actualizar:", error);
       } finally {
-        isUpdating.value = false;
-        reviewToUpdate.value = null;
-        selectedReview.value = null;
+        this.isUpdating = false;
+        this.reviewToUpdate = null;
+        this.selectedReview = null;
       }
-    };
-    const formattedDate = new Date().toLocaleDateString("en-US", {
-      month: "2-digit",
-      day: "2-digit",
-      year: "numeric",
-    });
-
-    const closeDeleteModal = () => {
-      showDeleteModal.value = false;
-      reviewToDelete.value = null;
-    };
-
-    const closeEditModal = () => {
-      showEditModal.value = false;
-      reviewToUpdate.value = null;
-      selectedReview.value = null;
-    };
-
-    // Cargar las reviews inmediatamente
+    },
+    closeEditModal() {
+      this.showEditModal = false;
+      this.reviewToUpdate = null;
+      this.selectedReview = null;
+    },
+  },
+  mounted() {
+    const store = useReviewsFirestore();
     store.readReviews();
 
-    const filteredReviews = computed(() => {
-      if (!reviewsFirestore.value || !Array.isArray(reviewsFirestore.value)) {
-        return [];
-      }
-
-      const searchId = Number(props.serieId); // Convertir a número para comparar con serieId
-      const filtered = reviewsFirestore.value.filter((review) => {
-        return review.serieId === searchId; // Comparar números con números
-      });
-
-      return filtered;
-    });
-
-    return {
-      store,
-      reviewsFirestore,
-      filteredReviews,
-      isLoggedIn,
-      userEmail,
-      isDeleting,
-      showDeleteModal,
-      confirmDelete,
-      handleDelete,
-      closeDeleteModal,
-      showEditModal,
-      reviewToUpdate,
-      selectedReview,
-      updateReview,
-      isUpdating,
-      closeEditModal,
-      handleUpdate,
-    };
   },
-
   components: {
     Star,
     Edit,
