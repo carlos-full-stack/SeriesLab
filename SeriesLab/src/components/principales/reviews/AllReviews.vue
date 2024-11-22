@@ -38,11 +38,19 @@ export default {
       if (!this.reviewsFirestore || !Array.isArray(this.reviewsFirestore)) {
         return [];
       }
-      const searchId = Number(this.serieId);
-      return this.reviewsFirestore.filter((review) =>  {
-        return review.serieId === Number(this.serieId);
-      }
-      );
+      // Filtrar por serieId y ordenar por fecha de creación (más recientes primero)
+      return this.reviewsFirestore
+        .filter((review) => {
+          const reviewSerieId = Number(review.serieId);
+          const currentSerieId = Number(this.serieId);
+          return reviewSerieId === currentSerieId;
+        })
+        .sort((a, b) => {
+          // Convertir fechas a timestamps para comparación
+          const dateA = new Date(a.creationDate).getTime();
+          const dateB = new Date(b.creationDate).getTime();
+          return dateB - dateA; // Orden descendente (más reciente primero)
+        });
     },
   },
   methods: {
@@ -118,7 +126,6 @@ export default {
   mounted() {
     const store = useReviewsFirestore();
     store.readReviews();
-
   },
   components: {
     Star,
@@ -156,7 +163,7 @@ export default {
 
           <div class="flex flex-row gap-2">
             <button
-              v-if="isLoggedIn && userEmail === review.userEmail"
+             v-if="isLoggedIn && userEmail === review.userEmail"
               @click="updateReview(review)"
               class="p-2 hover:bg-gray-700/30 rounded-full transition-colors"
             >
@@ -164,7 +171,7 @@ export default {
             </button>
 
             <button
-              v-if="isLoggedIn && userEmail === review.userEmail"
+            v-if="isLoggedIn && userEmail === review.userEmail"
               @click="confirmDelete(review.id)"
               :disabled="isDeleting"
               class="p-2 hover:bg-gray-700/30 rounded-full transition-colors"

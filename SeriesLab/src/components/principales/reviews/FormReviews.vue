@@ -91,9 +91,15 @@ return{
    console.log(this.date);
    
     this.id = this.serieId
+   console.log(this.date);
+   
+    this.id = this.serieId
     console.log(`Prueba : ${this.id}`);
    
     console.log(this.objetoReview);
+    
+    
+    
   }
 };
 </script>

@@ -12,7 +12,9 @@ async function getAllReviewsFirestore() {
     const todasSnapshot = await getDocs(todasLasColecciones);
     const todasLasReviewsArray = todasSnapshot.docs.map(doc => ({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
+        serieId: Number(doc.data().serieId), // Aseguramos que serieId sea número
+        rating: Number(doc.data().rating) // Aseguramos que rating sea número
     }));
     return todasLasReviewsArray //Aquí devuelve un array de objetos (reviews) - es el "R"EAD del CRUD
 }
@@ -27,10 +29,7 @@ export const useReviewsFirestore = defineStore('reviews', {
         //Read reviews:
         async readReviews() {
             this.reviewsFirestore = await getAllReviewsFirestore();
-
             console.log('Reviews actualizadas:', this.reviewsFirestore);
-            console.log(this.reviewsFirestore);
-            
         },
 
         //Crear review
@@ -41,23 +40,34 @@ export const useReviewsFirestore = defineStore('reviews', {
                 await addDoc(collection(getFirestore(), 'all-reviews-series'), {
                     creationDate: objetoReview.fecha,
                     comment: objetoReview.comentario,
-                    rating: objetoReview.rate,
-                    serieId: objetoReview.idSerie,
+                    rating: Number(objetoReview.rate),
+                    serieId: Number(objetoReview.idSerie),
                     userEmail: objetoReview.emailUsuario,
+                    lastUpdate: objetoReview.fecha
                 });
                 alert('Review almacenada con éxito');
                 await this.readReviews()
             } catch (e) {
                 console.error('Error al almacenar la review: ', e);
             }
-
-            return
         },
 
         //Actualizar review
-        updateReview() {
-            //filter contacto
-            return
+        async UpdateReview(reviewId, updatedReview) {
+            try {
+                const reviewRef = doc(db, 'all-reviews-series', reviewId);
+                await updateDoc(reviewRef, {
+                    ...updatedReview,
+                    rating: Number(updatedReview.rating)
+                });
+
+                // Actualizar el estado local después de la actualización
+                await this.readReviews();
+                return true;
+            } catch (error) {
+                console.error('Error al actualizar la review:', error);
+                return false;
+            }
         },
 
         //Borrar review
@@ -70,20 +80,6 @@ export const useReviewsFirestore = defineStore('reviews', {
                 return true;
             } catch (error) {
                 console.error('Error al eliminar la review:', error);
-                return false;
-            }
-        },
-        // Editar review
-        async UpdateReview(reviewId, updatedReview) {
-            try {
-                const reviewRef = doc(db, 'all-reviews-series', reviewId);
-                await updateDoc(reviewRef, updatedReview);
-
-                // Actualizar el estado local después de la actualización
-                await this.readReviews();
-                return true;
-            } catch (error) {
-                console.error('Error al actualizar la review:', error);
                 return false;
             }
         }
