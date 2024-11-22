@@ -72,7 +72,7 @@ return{
       console.log(this.objetoReview);
       
       try{
-        await this.useReviews.createReview(this.objetoReview)
+        await this.useReviews.createReview({objetoReview :this.objetoReview})
         console.log('review enviada');
         
       }catch{
