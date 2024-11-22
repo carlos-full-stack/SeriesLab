@@ -8,6 +8,7 @@ import { useUserStore } from "../../../../stores/userStore.js";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../firebase/firebase.js";
 import UpdateReview from "./UpdateReview.vue";
+import { onMounted, } from 'vue';
 
 export default {
   props: {
@@ -17,6 +18,9 @@ export default {
     },
   },
   setup(props) {
+
+   
+   
     const store = useReviewsFirestore();
     const { reviewsFirestore } = storeToRefs(store);
 
@@ -153,6 +157,7 @@ export default {
     DeleteModal,
     UpdateReview,
   },
+  
 };
 </script>
 
