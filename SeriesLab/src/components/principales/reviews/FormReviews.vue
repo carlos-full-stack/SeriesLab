@@ -105,7 +105,7 @@ return{
 </script>
 
 <template>
-  <div class="w-full flex flex-col justify-center items-center px-5 lg:px-20 my-3">
+  <div v-if="useUser.isLoggedIn" class="w-full flex flex-col justify-center items-center px-5 lg:px-20 my-3">
     <div class="w-full bg-secondaryBackground grid grid-cols-3 justify-center rounded-2xl">
       <div class="header col-span-3 flex justify-between mx-10 mt-8">
         <div class="flex items-center">
