@@ -53,7 +53,7 @@ export const useReviewsFirestore = defineStore('reviews', {
         },
 
         //Actualizar review
-        async UpdateReview(reviewId, updatedReview) {
+        async updateReview(reviewId, updatedReview) {
             try {
                 const reviewRef = doc(db, 'all-reviews-series', reviewId);
                 await updateDoc(reviewRef, {

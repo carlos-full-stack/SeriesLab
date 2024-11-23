@@ -102,7 +102,7 @@ export default {
 
       try {
         const store = useReviewsFirestore();
-        await store.UpdateReview(this.reviewToUpdate, {
+        await store.updateReview(this.reviewToUpdate, {
           comment: updatedData.comment,
           rating: updatedData.rating,
           lastUpdate: this.formattedDate,
